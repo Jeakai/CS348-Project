@@ -1,0 +1,24 @@
+Brief Application Information
+Our application will be focused on presenting statistics of professional Basketball Players like Teams, Field Goals made, 3 Pointers Made and Minutes Played. The dataset that we have chosen was found on kaggle. 
+
+Users would be the general public that is interested in keeping track with their favourite players’ statistics and the roster changes made each season. All 5 of us, the developers, will be the administrator for this database system. The main functionalities that we would like to perform includes: user registration, players watchlist, players’ seasons’ statistics. 
+
+
+Choice of Platforms
+The application will be locally run with a web-based user interface, providing an appealing and user-friendly way to query historical nba data.
+
+Tech Stack:
+Frontend: ReactJS
+Backend: NodeJS
+DB: MySQL
+
+Member List
+Yap Hong Sheng
+Lim Jacky
+Ng Weiu Seann
+Madhuv Sharma
+Ryan Kahkeshan
+
+
+Github Repository
+https://github.com/Jeakai/CS348-Project
