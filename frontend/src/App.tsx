@@ -1,39 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Landing from "./pages/Landing";
+import Players from "./pages/Players";  // Make sure this is imported
+import Profile from "./pages/Profile";  // Make sure this is imported
+import Mainpage from "./pages/Mainpage";  // Make sure this is imported
+import Signup from "./pages/Signup";
+import Teams from "./pages/Teams";  // If you have a "Teams" page, make sure it's imported
+import './app.css'; 
 
-function App() {
-  const [count, setCount] = useState(0)
 
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      {/* Tailwind Test Div */}
-      <div className="bg-blue-500 text-white p-4 rounded-md">
-        Tailwind is working! Are you sure?
-      </div>
-    </>
-  )
-}
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Landing />} />  {/* Default route */}
+          <Route path="mainpage" element={<Mainpage />} />
+          <Route path="players" element={<Players />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="teams" element={<Teams />} /> {/* If you have a Teams page */}
+        </Route>
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;
