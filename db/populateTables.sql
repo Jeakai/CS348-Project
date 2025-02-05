@@ -7,3 +7,11 @@ INSERT INTO teams
   SELECT * FROM read_csv('./dummy/teams.csv');
 --   SELECT * FROM read_csv('./prod/teams.csv');
 SELECT * FROM teams;
+
+INSERT INTO users
+  SELECT * FROM read_csv('./dummy/users.csv');
+SELECT * FROM users;
+
+INSERT INTO favourites
+  SELECT * FROM read_csv('./dummy/favourites.csv');
+SELECT * FROM favourites;
