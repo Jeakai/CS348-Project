@@ -11,3 +11,7 @@ SELECT * FROM teams;
 INSERT INTO users
   SELECT * FROM read_csv('./dummy/users.csv');
 SELECT * FROM users;
+
+INSERT INTO favourites
+  SELECT * FROM read_csv('./dummy/favourites.csv');
+SELECT * FROM favourites;

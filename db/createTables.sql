@@ -57,3 +57,11 @@ CREATE TABLE users (
   salt 				VARCHAR(16),
   email				VARCHAR(100)
 );
+
+CREATE TABLE favourites (
+  uid DECIMAL(9,0),
+  pid DECIMAL(9,0),
+  PRIMARY KEY (uid, pid),
+  FOREIGN KEY (uid) REFERENCES users(uid),
+  FOREIGN KEY (pid) REFERENCES players(pid)
+);
