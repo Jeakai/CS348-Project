@@ -15,10 +15,10 @@ const errorHandler = require('./middleware/errorHandler');
 app.use(express.json());
 
 // Route mounting
-app.use('/api', authRoutes);           // Handles /register, /users/:id updates/deletions
-app.use('/api/players', playerRoutes);   // Handles players and season stats endpoints
-app.use('/api/teams', teamRoutes);       // Handles teams endpoint
-app.use('/api/users', favouriteRoutes);  // Handles favourites endpoints
+app.use('/api', authRoutes);                    // Handles /register, /users/:id updates/deletions
+app.use('/api/players', playerRoutes);          // Handles players and season stats endpoints
+app.use('/api/teams', teamRoutes);              // Handles teams endpoint
+app.use('/api/favourites', favouriteRoutes);    // Handles favourites endpoints
 
 // Serve static files from the 'assets' directory (root directory)
 app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
