@@ -6,8 +6,7 @@ const players = [
   { title: "Stephen Curry", image: "assets/Steph.avif", description: "Golden State Warriors" },
   { title: "Kevin Durant", image: "assets/Kevin.jpg", description: "Phoenix Suns" },
   { title: "Giannis Antetokounmpo", image: "assets/Giannis.jpg", description: "Milwaukee Bucks" },
-  { title: "Wembayama", image: "assets/wemby.jpg", description: "Idk what team"},
-  { title: "Wembayama", image: "assets/wemby.jpg", description: "Idk what team"},
+  { title: "Wembayama", image: "assets/wemby.jpg", description: "San Antonio Spurs"},
   { title: "Luka Dončić", image: "assets/Luka.jpg", description: "Dallas Mavericks" }
 ];
 

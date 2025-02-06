@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+interface SignUpResponse {
+  message: string;
+}
+
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -27,29 +31,30 @@ const SignUp = () => {
       return;
     }
 
-    // Send data to backend (mocked API call here)
+    // Send data to backend
     try {
-        const response = await axios.post("http://localhost:3000/api/register", { // Make sure backend is accessible here
-            username,
-            email,
-            password,
-          });
-    
-          if (response.data.message === "User registered") {
-            navigate("/login"); // Redirect to login page after successful signup
-          }
+      const response = await axios.post<SignUpResponse>("http://localhost:3000/api/register", {
+        username,
+        email,
+        password,
+      });
+
+      // Type assertion for response.data
+      const responseData = response.data as any;
+
+      if (responseData.message === "User registered") {
+        navigate("/login"); // Redirect to login page after successful signup
+      } else {
+        setError("Unexpected response from server.");
+      }
     } catch (err: unknown) {
-        if (axios.isAxiosError(err)) { // Check if err is an AxiosError
-            if (err.response && err.response.data && err.response.data.error) {
-              setError(err.response.data.error);  // Set error message from the backend
-            } else {
-              setError("Error signing up. Please try again.");
-            }
-          } else {
-            setError("An unknown error occurred.");
-          }
-        }
+      if ((err as any)?.response?.data?.error) {  // ✅ Manually asserting the error type
+        setError((err as any).response.data.error);
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-center font-mono text-black">
