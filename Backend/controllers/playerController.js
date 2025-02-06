@@ -9,13 +9,3 @@ exports.getPlayers = async (req, res, next) => {
     next(error);
   }
 };
-
-exports.getPlayerSeasons = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const seasons = await playerModel.getPlayerSeasons(id);
-    res.json(seasons);
-  } catch (error) {
-    next(error);
-  }
-};
