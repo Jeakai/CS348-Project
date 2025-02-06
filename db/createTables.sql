@@ -6,14 +6,14 @@ DROP TABLE IF EXISTS teams;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE teams (
-  tid           DECIMAL(3,0) NOT NULL PRIMARY KEY,
+  tid           INT NOT NULL PRIMARY KEY,
   team          VARCHAR(100) NOT NULL,
   abbreviation  VARCHAR(10)
 );
 
 CREATE TABLE players (
-  pid          DECIMAL(9,0) NOT NULL PRIMARY KEY,
-  tid          DECIMAL(3,0),
+  pid          INT NOT NULL PRIMARY KEY,
+  tid          INT,
   season       VARCHAR(50),
   stage        VARCHAR(50),
   pname        VARCHAR(100),
@@ -45,7 +45,7 @@ CREATE TABLE players (
   high_school  VARCHAR(150),
   draft_round  INT,
   draft_pick   INT,
-  draft_tid    DECIMAL(3,0),
+  draft_tid    INT,
   FOREIGN KEY (tid) REFERENCES teams(tid) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (draft_tid) REFERENCES teams(tid) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -60,7 +60,7 @@ CREATE TABLE users (
 
 CREATE TABLE favourites (
   uid INT,
-  pid DECIMAL(9,0),
+  pid INT,
   PRIMARY KEY (uid, pid),
   FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (pid) REFERENCES players(pid) ON DELETE CASCADE ON UPDATE CASCADE
