@@ -1,9 +1,11 @@
 CREATE DATABASE IF NOT EXISTS my_basketball_db;
 USE my_basketball_db;
 
+DROP TABLE IF EXISTS favourites;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS players;
 DROP TABLE IF EXISTS teams;
-DROP TABLE IF EXISTS users;
+
 
 CREATE TABLE teams (
   tid           INT NOT NULL PRIMARY KEY,
