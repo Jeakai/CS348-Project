@@ -1,8 +1,14 @@
 const pool = require('../config/db');
 
-exports.createUser = async (username, email, password) => {
-  const sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-  const [result] = await pool.execute(sql, [username, email, password]);
+exports.findUserByEmail = async (email) => {
+  const sql = 'SELECT * FROM users WHERE email = ?'
+  const result = await pool.execute(sql, [email]);
+  return result[0];
+};
+
+exports.createUser = async (username, email, hashedPassword, password) => {
+  const sql = 'INSERT INTO users (uname, email, hashed_password, salt) VALUES (?, ?, ?, ?)';
+  const [result] = await pool.execute(sql, [username, email, hashedPassword, password]);
   return result;
 };
 

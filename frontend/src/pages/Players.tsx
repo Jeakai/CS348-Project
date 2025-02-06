@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 
+interface Player {
+  name: string;
+  team: string;
+  age: number;
+  fieldGoals: number;
+}
+
 const Players = () => {
   // Initial player data
   const initialPlayers = [
@@ -11,12 +18,15 @@ const Players = () => {
   ];
 
   // State for players data & sorting
-  const [players, setPlayers] = useState(initialPlayers);
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const [players, setPlayers] = useState<Player[]>(initialPlayers);
+  const [sortConfig, setSortConfig] = useState<{ key: keyof Player | null; direction: "asc" | "desc" }>({
+    key: null,
+    direction: "asc",
+  });
 
   // Sorting function
-  const sortPlayers = (key) => {
-    let direction = "asc";
+  const sortPlayers = (key: keyof Player) => {
+    let direction: "asc" | "desc" = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
       direction = "desc";
     }
@@ -32,7 +42,7 @@ const Players = () => {
   };
 
   // Function to get sort indicator (🔼 / 🔽)
-  const getSortIndicator = (key) => {
+  const getSortIndicator = (key: keyof Player) => {
     if (sortConfig.key === key) {
       return sortConfig.direction === "asc" ? "🔼" : "🔽";
     }

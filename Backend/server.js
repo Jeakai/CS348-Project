@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,6 +19,17 @@ app.use('/api', authRoutes);           // Handles /register, /users/:id updates/
 app.use('/api/players', playerRoutes);   // Handles players and season stats endpoints
 app.use('/api/teams', teamRoutes);       // Handles teams endpoint
 app.use('/api/users', favouriteRoutes);  // Handles favourites endpoints
+
+// Serve static files from the 'assets' directory (root directory)
+app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+// Catch-all route to serve the React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+});
 
 // Global error handling middleware
 app.use(errorHandler);
