@@ -46,12 +46,12 @@ CREATE TABLE players (
   draft_round  INT,
   draft_pick   INT,
   draft_tid    DECIMAL(3,0),
-  FOREIGN KEY (tid) REFERENCES teams(tid),
-  FOREIGN KEY (draft_tid) REFERENCES teams(tid)
+  FOREIGN KEY (tid) REFERENCES teams(tid) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (draft_tid) REFERENCES teams(tid) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE users (
-  uid 				DECIMAL(9,0) NOT NULL PRIMARY KEY,
+  uid 				INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   uname 			VARCHAR(50) NOT NULL UNIQUE,
   hashed_password 	VARCHAR(255) NOT NULL,
   salt 				VARCHAR(16),
@@ -59,9 +59,9 @@ CREATE TABLE users (
 );
 
 CREATE TABLE favourites (
-  uid DECIMAL(9,0),
+  uid INT,
   pid DECIMAL(9,0),
   PRIMARY KEY (uid, pid),
-  FOREIGN KEY (uid) REFERENCES users(uid),
-  FOREIGN KEY (pid) REFERENCES players(pid)
+  FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (pid) REFERENCES players(pid) ON DELETE CASCADE ON UPDATE CASCADE
 );
