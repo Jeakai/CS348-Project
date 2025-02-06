@@ -4,8 +4,8 @@ exports.getUserFavourites = async (userId) => {
   const sql = `
     SELECT p.* 
     FROM players p 
-    INNER JOIN user_favourites uf ON p.id = uf.player_id 
-    WHERE uf.user_id = ?`;
+    INNER JOIN favourites uf ON p.pid = uf.pid 
+    WHERE uf.uid = ?`;
   const [rows] = await pool.execute(sql, [userId]);
   return rows;
 };
@@ -16,8 +16,8 @@ exports.getConnection = async () => {
 
 exports.updateUserFavourites = async (connection, userId, playerIds) => {
   await connection.beginTransaction();
-  await connection.execute('DELETE FROM user_favourites WHERE user_id = ?', [userId]);
-  const sql = 'INSERT INTO user_favourites (user_id, player_id) VALUES (?, ?)';
+  await connection.execute('DELETE FROM favourites WHERE uid = ?', [userId]);
+  const sql = 'INSERT INTO favourites (uid, pid) VALUES (?, ?)';
   for (const playerId of playerIds) {
     await connection.execute(sql, [userId, playerId]);
   }

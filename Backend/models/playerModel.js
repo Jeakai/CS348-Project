@@ -5,7 +5,7 @@ exports.getPlayers = async (search, sortBy, order, groupBy) => {
   const params = [];
   
   if (search) {
-    sql += ' WHERE player_name LIKE ?';
+    sql += ' WHERE pname LIKE ?';
     params.push(`%${search}%`);
   }
 
@@ -19,11 +19,5 @@ exports.getPlayers = async (search, sortBy, order, groupBy) => {
   }
 
   const [rows] = await pool.execute(sql, params);
-  return rows;
-};
-
-exports.getPlayerSeasons = async (playerId) => {
-  const sql = 'SELECT * FROM seasons_stats WHERE player_id = ? ORDER BY season DESC';
-  const [rows] = await pool.execute(sql, [playerId]);
   return rows;
 };
