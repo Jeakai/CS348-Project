@@ -18,6 +18,8 @@ exports.getPlayers = async (search, sortBy, order, groupBy) => {
     sql += ` ORDER BY ${sortBy} ${sortOrder}`;
   }
 
+  console.log("SQL", sql);
+  console.log("params", params);
   const [rows] = await pool.execute(sql, params);
   return rows;
 };
