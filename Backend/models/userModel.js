@@ -6,6 +6,13 @@ exports.findUserByEmail = async (email) => {
   return result[0];
 };
 
+exports.findUserById = async (uid) => {
+  const sql = 'SELECT uid, uname AS username, email FROM users WHERE uid = ?';
+  const [result] = await pool.execute(sql, [uid]);
+  return result.length ? result[0] : null;
+};
+
+
 exports.createUser = async (username, email, hashedPassword, password) => {
   const sql = 'INSERT INTO users (uname, email, hashed_password, salt) VALUES (?, ?, ?, ?)';
   const [result] = await pool.execute(sql, [username, email, hashedPassword, password]);
