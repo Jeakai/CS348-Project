@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS my_basektball_db;
+CREATE DATABASE IF NOT EXISTS my_basketball_db;
 USE my_basketball_db;
 
 DROP TABLE IF EXISTS members;
@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS teams;
 
 CREATE TABLE teams (
   tid			INT NOT NULL PRIMARY KEY,
-  tname			VARCHAR(100) NOT NULL,
+  team			VARCHAR(100) NOT NULL,
   abbreviation 	VARCHAR(5)
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE players (
   pid 			INT NOT NULL PRIMARY KEY,
   pname			VARCHAR(100) NOT NULL,
   birth_year	YEAR,
-  birth_month	INT CHECK(birth_month > 0 AND birth_month <= 12),
+  birth_month	VARCHAR(10),
   birth_date	DATE,
   nationality	VARCHAR(100),
   high_school	VARCHAR(100),
@@ -47,6 +47,28 @@ CREATE TABLE members (
   tid		INT,
   season	VARCHAR(50),
   stage		VARCHAR(50),
+  gp		INT,
+  min		INT,
+  fgm		INT,
+  fga		INT,
+  threepm	INT,
+  threepa	INT,
+  ftm		INT,
+  fta		INT,
+  tov		INT,
+  pf		INT,
+  orb		INT,
+  drb		INT,
+  reb		INT,
+  ast		INT,
+  stl		INT,
+  blk		INT,
+  pts		INT,
+  height	VARCHAR(10),
+  height_cm	INT,
+  weight	INT,
+  weight_kg	INT,
+  PRIMARY KEY (pid, tid),
   FOREIGN KEY (pid) REFERENCES players(pid) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (tid) REFERENCES teams(tid) ON DELETE CASCADE ON UPDATE CASCADE
 );

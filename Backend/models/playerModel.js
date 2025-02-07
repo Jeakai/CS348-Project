@@ -1,7 +1,7 @@
 const pool = require('../config/db');
 
 exports.getPlayers = async (search, sortBy, order, groupBy) => {
-  let sql = 'SELECT * FROM players';
+  let sql = 'SELECT * FROM players JOIN members ON players.pid = members.pid';
   const params = [];
   
   if (search) {
@@ -21,3 +21,4 @@ exports.getPlayers = async (search, sortBy, order, groupBy) => {
   const [rows] = await pool.execute(sql, params);
   return rows;
 };
+
