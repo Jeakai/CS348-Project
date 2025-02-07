@@ -39,6 +39,8 @@ const Players = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
 
   // Sorting configuration state
   const [sortConfig, setSortConfig] = useState<{ key: keyof Player | null; direction: "asc" | "desc" }>({
@@ -47,22 +49,34 @@ const Players = () => {
   });
 
   // Fetching players data from the API
-  useEffect(() => {
-    const fetchPlayers = async () => {
+  
+    const fetchPlayers = async (searchQuery = "") => {
       try {
-        // Replace with your API endpoint
-        const response = await axios.get("http://localhost:3000/api/players");
-        setPlayers(response.data); // Set fetched players data to state
-        setLoading(false); // Stop loading
+        setLoading(true);
+        const response = await axios.get<Player[]>(`http://localhost:3000/api/players`, {
+          params: { search: searchQuery }, // Sending search query to backend
+        });
+        setPlayers(response.data);
+        setLoading(false);
       } catch (err) {
-        setError("Failed to fetch players data."); // Set error message on failure
-        setLoading(false); // Stop loading
+        setError("Failed to fetch players data.");
+        setLoading(false);
       }
     };
 
-    fetchPlayers();
-  }, []); // Empty dependency array means it runs once when the component mounts
+    useEffect(() => {
+      fetchPlayers(); // Load players initially
+    }, []);
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearchSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    fetchPlayers(searchTerm);
+  };
+  
   // Sorting function for player data
   const sortPlayers = (key: keyof Player) => {
     let direction: "asc" | "desc" = "asc";
@@ -101,6 +115,22 @@ const Players = () => {
         <div>Loading...</div>
       ) : (
         <div className="overflow-x-auto">
+          <form onSubmit={handleSearchSubmit} className="mb-4 flex items-center">
+            <input
+              type="text"
+              placeholder="Search player..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="border px-3 py-2 w-full md:w-1/3 rounded-md"
+            />
+            <button
+              type="submit"
+              className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
+            >
+              Search
+            </button>
+          </form>
+
           {/* Table for displaying players */}
           <table className="min-w-full border border-gray-300 bg-white">
             <thead className="bg-gray-200">

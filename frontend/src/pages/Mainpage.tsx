@@ -6,9 +6,14 @@ const players = [
   { title: "Stephen Curry", image: "assets/Steph.avif", description: "Golden State Warriors" },
   { title: "Kevin Durant", image: "assets/Kevin.jpg", description: "Phoenix Suns" },
   { title: "Giannis Antetokounmpo", image: "assets/Giannis.jpg", description: "Milwaukee Bucks" },
-  { title: "Wembayama", image: "assets/wemby.jpg", description: "Idk what team"},
-  { title: "Wembayama", image: "assets/wemby.jpg", description: "Idk what team"},
-  { title: "Luka Dončić", image: "assets/Luka.jpg", description: "Dallas Mavericks" }
+  { title: "Victor Wembanyama", image: "assets/wemby.jpg", description: "San Antonio Spurs" },
+  { title: "Luka Dončić", image: "assets/Luka.jpg", description: "Dallas Mavericks" },
+  { title: "Joel Embiid", image: "assets/Embiid.jpg", description: "Philadelphia 76ers" },
+  { title: "Nikola Jokić", image: "assets/Jokic.avif", description: "Denver Nuggets" },
+  { title: "Jayson Tatum", image: "assets/Tatum.jpg", description: "Boston Celtics" },
+  { title: "Devin Booker", image: "assets/Booker.jpg", description: "Phoenix Suns" },
+  { title: "Ja Morant", image: "assets/Morant.jpg", description: "Memphis Grizzlies" },
+  { title: "Jimmy Butler", image: "assets/Butler.avif", description: "Miami Heat" }
 ];
 
 const teams = [
@@ -16,8 +21,15 @@ const teams = [
   { title: "Golden State Warriors", image: "assets/GSW.png", description: "Western Conference" },
   { title: "Boston Celtics", image: "assets/Boston celtics.jpg", description: "Eastern Conference" },
   { title: "Miami Heat", image: "assets/Miami Heat.jpg", description: "Eastern Conference" },
-  { title: "Phoenix Suns", image: "assets/Pheonix Suns.avif", description: "Western Conference" }
+  { title: "Phoenix Suns", image: "assets/Pheonix Suns.avif", description: "Western Conference" },
+  { title: "Milwaukee Bucks", image: "assets/Bucks.png", description: "Eastern Conference" },
+  { title: "Philadelphia 76ers", image: "assets/76ers.jpg", description: "Eastern Conference" },
+  { title: "Denver Nuggets", image: "assets/Nuggets.jpg", description: "Western Conference" },
+  { title: "Memphis Grizzlies", image: "assets/Grizzlies.jpg", description: "Western Conference" },
+  { title: "Dallas Mavericks", image: "assets/Mavericks.jpg", description: "Western Conference" },
+  { title: "San Antonio Spurs", image: "assets/Spurs.jpg", description: "Western Conference" }
 ];
+
 
 const Mainpage = () => {
   return (

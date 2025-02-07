@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
+const cors = require('cors');
 
 // Import routes and middleware
 const authRoutes = require('./routes/authRoutes');
@@ -15,6 +16,22 @@ const userRoutes = require('./routes/userRoutes');
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+// Enable CORS
+app.use(cors({
+  origin: '*', // Allow all origins; adjust as necessary
+  methods: ['GET', 'PUT', 'POST', 'OPTIONS'],
+  allowedHeaders: [
+    'Origin',
+    'X-Requested-With',
+    'Content-Type',
+    'Accept',
+    'Access-Control-Allow-Headers',
+    'Access-Control-Request-Method',
+    'Access-Control-Request-Headers'
+  ],
+  credentials: true
+}));
 
 // Route mounting
 app.use('/api', authRoutes);                    // Handles /register, /users/:id updates/deletions

@@ -6,7 +6,10 @@
   - GET
     - /players -> gets all players
     - /teams -> gets all teams
-    - /favorites/:id -> gets all favorites for a user
+    - /favorites/:id -> gets all favorites for user with uid = id
+  - PUT
+    - /favorites/:id -> updates favorites for user with uid = id; requires a body like `{"playerIds": [111, 117]}`
+  - POST
 
 # TODO:
 - Test other routes

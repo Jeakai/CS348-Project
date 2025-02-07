@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+interface LoginResponse {
+  token: string;
+}
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +30,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/api/login", {
+      const response = await axios.post<LoginResponse>("http://localhost:3000/api/login", {
         email,
         password,
       });
@@ -39,18 +43,15 @@ const Login = () => {
       } else {
         setError("Token not received. Please try again.");
       }
-    } catch (err: unknown) {
-        if (axios.isAxiosError(err)) { // Check if err is an AxiosError
-            if (err.response && err.response.data && err.response.data.error) {
-              setError(err.response.data.error);  // Set error message from the backend
-            } else {
-              setError("Error signing up. Please try again.");
-            }
-          } else {
-            setError("An unknown error occurred.");
-          }
-        }
+    } catch (err: unknown) {  // ✅ Changed from 'any' to 'unknown'
+      if ((err as any)?.response?.data?.error) {  // ✅ Manually asserting the error type
+        setError((err as any).response.data.error);
+      } else {
+        setError("An unknown error occurred.");
+      }
     }
+    
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-center font-mono text-black">

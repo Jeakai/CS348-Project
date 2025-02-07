@@ -17,7 +17,7 @@ exports.getConnection = async () => {
 exports.updateUserFavourites = async (connection, userId, playerIds) => {
   await connection.beginTransaction();
   await connection.execute('DELETE FROM favourites WHERE uid = ?', [userId]);
-  const sql = 'INSERT INTO favourites (uid, player_id) VALUES (?, ?)';
+  const sql = 'INSERT INTO favourites (uid, pid) VALUES (?, ?)';
   for (const playerId of playerIds) {
     await connection.execute(sql, [userId, playerId]);
   }

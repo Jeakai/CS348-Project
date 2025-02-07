@@ -5,7 +5,7 @@ exports.getPlayers = async (search, sortBy, order, groupBy) => {
   const params = [];
   
   if (search) {
-    sql += ' WHERE player_name LIKE ?';
+    sql += ' WHERE pname LIKE ?';
     params.push(`%${search}%`);
   }
 
