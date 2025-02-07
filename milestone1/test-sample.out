@@ -1,0 +1,10 @@
+uid	uname	hashed_password	email
+106	hoopfan99	$2b$12$nC2ZlrPrFKdaIOPMd1XSH.QLgso5KwqdNDM/FNOXas84X4qa4Atgi	hoopfan99@example.com
+pid	pname	birth_year	birth_month	birth_date	nationality	high_school	draft_round	draft_pick	draft_tid
+111	Shaquille O'Neal	1972	Mar	1972-03-06	United States	Robert G. Cole High School 	1	1	116
+pname	threepm
+Gary Payton	177
+Ray Allen	172
+Allan Houston	106
+Michael Finley	99
+Vince Carter	95
