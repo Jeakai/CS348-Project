@@ -11,6 +11,8 @@ const playerRoutes = require('./routes/playerRoutes');
 const teamRoutes = require('./routes/teamRoutes');
 const favouriteRoutes = require('./routes/favRoutes');
 const errorHandler = require('./middleware/errorHandler');
+const userRoutes = require('./routes/userRoutes'); 
+
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -36,6 +38,8 @@ app.use('/api', authRoutes);                    // Handles /register, /users/:id
 app.use('/api/players', playerRoutes);          // Handles players and season stats endpoints
 app.use('/api/teams', teamRoutes);              // Handles teams endpoint
 app.use('/api/favourites', favouriteRoutes);    // Handles favourites endpoints
+app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/users', userRoutes);
 
 // Serve static files from the 'assets' directory (root directory)
 app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
