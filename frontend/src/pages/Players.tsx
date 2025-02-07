@@ -5,10 +5,6 @@ interface Player {
   pname: string;
   season: string;
   nationality: string;
-  height: string;
-  height_cm: number;
-  weight: number;
-  weight_kg: number;
   pts: number;
   ast: number;
   reb: number;
@@ -155,18 +151,6 @@ const Players = () => {
                 </th>
                 <th
                   className="border px-4 py-2 text-left cursor-pointer"
-                  onClick={() => sortPlayers("height")}
-                >
-                  Height {getSortIndicator("height")}
-                </th>
-                <th
-                  className="border px-4 py-2 text-left cursor-pointer"
-                  onClick={() => sortPlayers("weight")}
-                >
-                  Weight {getSortIndicator("weight")}
-                </th>
-                <th
-                  className="border px-4 py-2 text-left cursor-pointer"
                   onClick={() => sortPlayers("pts")}
                 >
                   Points {getSortIndicator("pts")}
@@ -203,8 +187,6 @@ const Players = () => {
                   <td className="border px-4 py-2">{player.pname}</td>
                   <td className="border px-4 py-2">{player.season}</td>
                   <td className="border px-4 py-2">{player.nationality}</td>
-                  <td className="border px-4 py-2">{player.height}</td>
-                  <td className="border px-4 py-2">{player.weight}</td>
                   <td className="border px-4 py-2">{player.pts}</td>
                   <td className="border px-4 py-2">{player.ast}</td>
                   <td className="border px-4 py-2">{player.reb}</td>
