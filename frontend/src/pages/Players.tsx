@@ -46,13 +46,16 @@ const Players = () => {
 
   // Fetching players data from the API
   
-    const fetchPlayers = async (searchQuery = "") => {
+    const fetchPlayers = async (searchQuery = "", sortQuery: string | null = null, order="desc") => {
       try {
         setLoading(true);
+        const params: { search: string; sortBy?: string | null; order?: string | null } = { search: searchQuery, sortBy: sortQuery, order: order };
+        // console.log(params);
         const response = await axios.get<Player[]>(`http://localhost:3000/api/players`, {
-          params: { search: searchQuery }, // Sending search query to backend
+          params: params, // Sending search and sort query to backend
         });
         setPlayers(response.data);
+        setError("");
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch players data.");
@@ -88,6 +91,20 @@ const Players = () => {
 
     setPlayers(sortedPlayers);
     setSortConfig({ key, direction });
+  };
+
+  const sortPlayersNew = (key: keyof Player) => {
+    let direction: "asc" | "desc" = "asc";
+    if (sortConfig.key === key) {
+      if (sortConfig.direction === "asc") {
+        direction = "desc";
+      } else {
+        direction = "asc";
+      }
+    }
+
+    setSortConfig({ key: key, direction: direction });
+    fetchPlayers(searchTerm, key, direction);
   };
 
   // Function to get sort indicator (🔼 / 🔽)
@@ -133,49 +150,49 @@ const Players = () => {
               <tr>
                 <th
                   className="border px-4 py-2 text-left cursor-pointer"
-                  onClick={() => sortPlayers("pname")}
+                  onClick={() => sortPlayersNew("pname")}
                 >
                   Name {getSortIndicator("pname")}
                 </th>
                 <th
                   className="border px-4 py-2 text-left cursor-pointer"
-                  onClick={() => sortPlayers("season")}
+                  onClick={() => sortPlayersNew("season")}
                 >
                   Season {getSortIndicator("season")}
                 </th>
                 <th
                   className="border px-4 py-2 text-left cursor-pointer"
-                  onClick={() => sortPlayers("nationality")}
+                  onClick={() => sortPlayersNew("nationality")}
                 >
                   Nationality {getSortIndicator("nationality")}
                 </th>
                 <th
                   className="border px-4 py-2 text-left cursor-pointer"
-                  onClick={() => sortPlayers("pts")}
+                  onClick={() => sortPlayersNew("pts")}
                 >
                   Points {getSortIndicator("pts")}
                 </th>
                 <th
                   className="border px-4 py-2 text-left cursor-pointer"
-                  onClick={() => sortPlayers("ast")}
+                  onClick={() => sortPlayersNew("ast")}
                 >
                   Assists {getSortIndicator("ast")}
                 </th>
                 <th
                   className="border px-4 py-2 text-left cursor-pointer"
-                  onClick={() => sortPlayers("reb")}
+                  onClick={() => sortPlayersNew("reb")}
                 >
                   Rebounds {getSortIndicator("reb")}
                 </th>
                 <th
                   className="border px-4 py-2 text-left cursor-pointer"
-                  onClick={() => sortPlayers("blk")}
+                  onClick={() => sortPlayersNew("blk")}
                 >
                   Blocks {getSortIndicator("blk")}
                 </th>
                 <th
                   className="border px-4 py-2 text-left cursor-pointer"
-                  onClick={() => sortPlayers("stl")}
+                  onClick={() => sortPlayersNew("stl")}
                 >
                   Steals {getSortIndicator("stl")}
                 </th>

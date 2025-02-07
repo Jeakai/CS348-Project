@@ -8,6 +8,7 @@ exports.getPlayers = async (req, res, next) => {
 
     const validSortColumns = ["pname", "season", "nationality", "pts", "ast", "reb", "blk", "stl"];
     if (sortBy && !validSortColumns.includes(sortBy)) {
+      console.log("Invalid sort column:", sortBy);
       return res.status(400).json({ error: "Invalid sort column" });
     }
 

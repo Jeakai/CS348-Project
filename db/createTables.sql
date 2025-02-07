@@ -3,6 +3,7 @@ USE my_basketball_db;
 
 DROP TABLE IF EXISTS favourites;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS members;
 DROP TABLE IF EXISTS players;
 DROP TABLE IF EXISTS teams;
 
