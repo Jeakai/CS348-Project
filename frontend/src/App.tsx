@@ -26,10 +26,10 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Mainpage />} />  {/* Default route */}
-          <Route path="mainpage" element={<Mainpage />} />
-          <Route path="players" element={<Players />} />
-          <Route path="profile" element={<Profile />} />
+          <Route index element={<Landing />} />  {/* Default route */}
+          {/* <Route path="mainpage" element={<Mainpage />} /> */}
+          {/* <Route path="players" element={<Players />} /> */}
+          {/* <Route path="profile" element={<Profile />} /> */}
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
           {/* Protected routes - accessible only when authenticated */}
