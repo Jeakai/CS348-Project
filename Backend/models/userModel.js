@@ -13,7 +13,7 @@ exports.findUserById = async (uid) => {
 };
 
 
-exports.createUser = async (username, email, hashedPassword, password) => {
+exports.createUser = async (username, email, hashedPassword) => {
   const sql = 'INSERT INTO users (uname, email, hashed_password) VALUES (?, ?, ?)';
   const [result] = await pool.execute(sql, [username, email, hashedPassword]);
   return result;

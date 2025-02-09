@@ -20,7 +20,7 @@ exports.register = async (req, res, next) => {
       return res.status(400).json({ error: 'Email already in use' });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await userModel.createUser(username, email, hashedPassword, password);
+    const result = await userModel.createUser(username, email, hashedPassword);
     res.status(201).json({ message: 'User registered', userId: result.insertId });
   } catch (error) {
     next(error);

@@ -1,17 +1,13 @@
-INSERT INTO teams
-  SELECT * FROM read_csv('./dummy/teams.csv');
---   SELECT * FROM read_csv('./prod/teams.csv');
-SELECT * FROM teams;
+USE my_basketball_db;
 
-INSERT INTO players
-  SELECT * FROM read_csv('/dummy/players.csv');
---   SELECT * FROM read_csv('/prod/players.csv');
-SELECT * FROM players;
+LOAD DATA INFILE './dummy/teams.csv' INTO TABLE teams
+FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
 
-INSERT INTO users
-  SELECT * FROM read_csv('./dummy/users.csv');
-SELECT * FROM users;
+LOAD DATA INFILE './dummy/players.csv' INTO TABLE players
+FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
 
-INSERT INTO favourites
-  SELECT * FROM read_csv('./dummy/favourites.csv');
-SELECT * FROM favourites;
+LOAD DATA INFILE './dummy/users.csv' INTO TABLE users
+FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+
+LOAD DATA INFILE './dummy/favourites.csv' INTO TABLE favourites
+FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
