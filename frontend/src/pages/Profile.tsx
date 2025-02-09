@@ -96,7 +96,7 @@ const Profile = () => {
 
         {/* Settings Section */}
         <Card className="col-span-1 p-6 rounded-2xl shadow-md bg-white dark:bg-gray-800">
-          <CardContent>
+          <CardContent>thealleywaterloo
             <h3 className="text-xl font-semibold mb-3">Settings</h3>
             <div className="flex items-center justify-between mt-3">
               <span>Theme</span>
