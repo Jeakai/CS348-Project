@@ -7,7 +7,6 @@ import Mainpage from "./pages/Mainpage";  // Make sure this is imported
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Teams from "./pages/Teams";  // If you have a "Teams" page, make sure it's imported
-import './app.css'; 
 
 const isAuthenticated = (): boolean => {
   return localStorage.getItem("authToken") !== null;
