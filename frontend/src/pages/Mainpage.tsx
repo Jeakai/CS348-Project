@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Carousel from "../components/Carousel";
+import PlayerModal from "../components/PlayerModal";
 
 const players = [
   { title: "LeBron James", image: "assets/Lebron.jpg", description: "Los Angeles Lakers" },
@@ -32,8 +33,19 @@ const teams = [
 
 
 const Mainpage = () => {
-  return (
+  const [showPlayerModal, setShowPlayerModal] = useState(false);
+  const [player, setPlayer] = useState({ title: "", image: "", description: "" });
+
+  const onClickPlayer = (p: { title: string; image: string; description: string }) => {
+    console.log("Player clicked!", p);
+    setShowPlayerModal(true);
+    setPlayer(p);
+  };
+
+  return (<>
+    <PlayerModal show={showPlayerModal} handleClose={() => setShowPlayerModal(false)} player={player} />
     <div className="flex flex-col items-center justify-center min-h-screen text-center font-mono">
+
       {/* Title Section */}
       <div>
         <h1 className="text-9xl font-bold">HoopsHub</h1>
@@ -43,12 +55,12 @@ const Mainpage = () => {
       </div>
 
       {/* Players Section */}
-      <Carousel title="Players" items={players} />
+      <Carousel title="Players" items={players} onClick={onClickPlayer} />
 
       {/* Teams Section */}
       <Carousel title="Teams" items={teams} />
     </div>
-  );
+  </>);
 };
 
 export default Mainpage;

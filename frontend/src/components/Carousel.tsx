@@ -9,9 +9,10 @@ interface CarouselProps {
   title: string;
   items: { title: string; image: string; description: string }[];
   isLandingPage?: boolean; // Add this prop to identify the landing page
+  onClick?: (item: { title: string; image: string; description: string }) => void; // Add this prop to handle click events
 }
 
-const Carousel: React.FC<CarouselProps> = ({ title, items, isLandingPage = false }) => {
+const Carousel: React.FC<CarouselProps> = ({ title, items, isLandingPage = false, onClick = () => {} }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
 
   // Render the Splide-based carousel for the landing page
@@ -71,7 +72,9 @@ const Carousel: React.FC<CarouselProps> = ({ title, items, isLandingPage = false
         >
           {items.map((item, index) => (
             <div key={index} className="flex-shrink-0 w-48">
-              <Card title={item.title} image={item.image} description={item.description} />
+              <div onClick={() => onClick(item)} style={{ cursor: "pointer" }}>
+                <Card title={item.title} image={item.image} description={item.description} />
+              </div>
             </div>
           ))}
         </div>
