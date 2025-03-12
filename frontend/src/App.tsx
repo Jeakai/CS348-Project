@@ -1,13 +1,14 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Landing from "./pages/Landing";
-import Players from "./pages/Players";  // Make sure this is imported
-import Profile from "./pages/Profile";  // Make sure this is imported
-import Mainpage from "./pages/Mainpage";  // Make sure this is imported
+import Players from "./pages/Players";  
+import Profile from "./pages/Profile";  
+import Mainpage from "./pages/Mainpage"; 
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Teams from "./pages/Teams";  // If you have a "Teams" page, make sure it's imported
+import Teams from "./pages/Teams"; 
 import './app.css'; 
+import TeamDetails from "./pages/TeamDetails";
 
 const isAuthenticated = (): boolean => {
   return localStorage.getItem("authToken") !== null;
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="players" element={<ProtectedRoute element={<Players />} />} />
           <Route path="profile" element={<ProtectedRoute element={<Profile />} />} />
           <Route path="teams" element={<ProtectedRoute element={<Teams />} />} />
+          <Route path="teams/:abbr" element={<ProtectedRoute element={<TeamDetails />} />} /> 
         </Route>
       </Routes>
     </Router>

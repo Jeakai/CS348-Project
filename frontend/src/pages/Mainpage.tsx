@@ -28,7 +28,8 @@ const teams = [
   { title: "Denver Nuggets", image: "assets/Nuggets.jpg", description: "Western Conference" },
   { title: "Memphis Grizzlies", image: "assets/Grizzlies.jpg", description: "Western Conference" },
   { title: "Dallas Mavericks", image: "assets/Mavericks.jpg", description: "Western Conference" },
-  { title: "San Antonio Spurs", image: "assets/Spurs.jpg", description: "Western Conference" }
+  { title: "San Antonio Spurs", image: "assets/Spurs.jpg", description: "Western Conference" },
+  { title: "Houston Rockets", image:"assets/Houston.png", description: "Western Conference"}
 ];
 
 
