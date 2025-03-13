@@ -1,1 +1,3 @@
 Backend/.env
+db/prod/players.csv
+db/prod/members.csv
