@@ -7,7 +7,6 @@ import Mainpage from "./pages/Mainpage";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Teams from "./pages/Teams"; 
-import './app.css'; 
 import TeamDetails from "./pages/TeamDetails";
 
 const isAuthenticated = (): boolean => {
