@@ -68,7 +68,7 @@ CREATE TABLE members (
   height_cm	INT,
   weight	INT,
   weight_kg	INT,
-  PRIMARY KEY (pid, tid),
+  PRIMARY KEY (pid, tid, season, stage),
   FOREIGN KEY (pid) REFERENCES players(pid) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (tid) REFERENCES teams(tid) ON DELETE CASCADE ON UPDATE CASCADE
 );
