@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, CardContent } from "../components/ui/card";
-import { Button } from "../components/ui/button";
-import { Switch } from "../components/ui/switch";
-import { CameraIcon, PencilIcon } from "lucide-react";
+import Carousel from "../components/Carousel";
 
 const Profile = () => {
   interface User {
+    uid: number;
     uname: string;
     email: string;
   }
@@ -14,6 +13,8 @@ const Profile = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true); // Track loading state
   const [error, setError] = useState<string | null>(null); // Track errors
+  const [favourites, setFavourites] = useState<any[]>([]);
+  var favouriteCount;
 
   useEffect(() => {
     
@@ -37,7 +38,36 @@ const Profile = () => {
     fetchUser();
   }, []);
 
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const token = localStorage.getItem("authToken");
+        const response = await axios.get(`http://localhost:3000/api/favourites/${user?.uid}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setFavourites(response.data); // Expected to be an array of player objects
+      } catch (error) {
+        console.error("Error fetching favourites:", error);
+      }
+      if (favourites.length==0){
+        favouriteCount = 0;
+      }
+    };
+    if (user) {
+      fetchFavorites();
+    }
+  }, [user]);
+
+
+  // Map fetched favourites to the format the Carousel expects
+  const carouselItems = favourites.map((player: any) => ({
+    title: player.pname,                // Player's name as title
+    image: player.image || "",          // Player's image URL (adjust if needed)
+    description: player.team || "",     // Team info or description (adjust if needed)
+  }));
+  console.log("favourites:", favourites);
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
+
 
   return (
     <div className="dark:bg-[#121212] min-h-screen bg-gray-100 p-5 m-0">
@@ -46,75 +76,82 @@ const Profile = () => {
           <p>Loading profile...</p>
         ) : error ? (
           <div className={`min-h-screen ${isDarkTheme ? "bg-gray-900 text-white" : " text-gray-900 font-mono"}`}>
-      <div className="max-w-4xl mx-auto grid grid-cols-3 gap-6">
+      <div className="max-w-4xl mx-auto grid grid-cols-3 gap-4">
         {/* Profile Card */}
-        <h2 className="text-3xl font-bold">Profile Page</h2>
-        <Card className="flex justify-around col-span-3 items-center gap-6 p-10 rounded-2xl shadow-md bg-white dark:bg-[#393939] h-72">
+        <h2 className="col-span-5 text-3xl font-bold mb-4">Profile Page</h2>
+        <Card className="flex justify-around col-span-3 items-center gap-4 p-6 rounded-2xl shadow-md bg-white dark:bg-[#393939]">
           <div className="flex flex-col">
-            <div className="relative w-40 h-40">
-              <img
-                src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcRKsa5AE_yo9xCSR9pqKZz4g90rdwYnwxW9imCgS2lUEqhDJTboM7VwP-SwlepVmJoulkzl0SIjjzl6TnU"
-                alt="Profile"
-                className="w-full h-full rounded-full border-4 border-gray-300 object-cover"
-              />
-              <button className="absolute bottom-2 right-2 bg-gray-700 p-1 rounded-full">
-                {/*change image*/}
-                <CameraIcon className="text-white w-5 h-5" />
-              </button>
+            <div className="relative w-40 h-40 flex items-center justify-center rounded-full border-4 border-gray-300 bg-gray-200 text-4xl font-bold text-gray-600">
+              {user?.uname ? user.uname.slice(0, 2).toUpperCase() : "NA"}
             </div>
-            <div className="">
-              <div className="flex justify-center items-center gap-2 text-xl font-semibold">
-                Seann
-                <button className="text-gray-400">
-                  <PencilIcon className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-            <div className="text-gray-400">Since 7 Feb 2025</div>
-          </div>
-          {/*info*/}
-          <div className="flex-col text-2xl w-3/6">
-            <div className="flex justify-between m-5">
-              <div className="font-semibold">Username: </div>
-              <div>Seann</div>
-            </div>
-            <div className="flex justify-between">
-              <div className="font-semibold">Email: </div>
-              <div>seann@gmail.com</div>
+            <div className="flex justify-center items-center gap-1 text-xl font-semibold mt-2">
+              {user?.uname}
             </div>
           </div>
+          {/* Info Section */}
+          <div className="text-xl flex flex-col gap-2">
+            <div className="flex gap-2 items-center">
+              <span className="font-semibold">Username:</span>
+              <span>{user?.uname}</span>
+            </div>
+            <div className="flex gap-2 items-center">
+              <span className="font-semibold">Email:</span>
+              <span>{user?.email}</span>
+            </div>
+          </div>
+
         </Card>
 
         {/* Favourites Section */}
-        <Card className="dark:bg-gray-700 col-span-2 p-6 rounded-2xl shadow-md bg-white">
+        <Card className="dark:bg-gray-700 p-6 col-span-3 items-center rounded-2xl shadow-md bg-white">
           <CardContent>
             <h3 className="text-xl font-semibold mb-3 ">Favourites</h3>
             <p className="text-gray-500">You haven't added any favourites yet.</p>
-          </CardContent>
-        </Card>
-
-        {/* Settings Section */}
-        <Card className="col-span-1 p-6 rounded-2xl shadow-md bg-white dark:bg-gray-800">
-          <CardContent>thealleywaterloo
-            <h3 className="text-xl font-semibold mb-3">Settings</h3>
-            <div className="flex items-center justify-between mt-3">
-              <span>Theme</span>
-              <Switch checked={isDarkTheme} onCheckedChange={setIsDarkTheme} />
-            </div>
-            <div className="flex items-center justify-between mt-3">
-              <span>Change Password</span>
-              <Button variant="outline">Change</Button>
-            </div>
+            <Carousel title="" items={carouselItems} isLandingPage={true} />
           </CardContent>
         </Card>
       </div>
     </div>
-          
         ) : (
-          <>
-            <p><strong>Username:</strong> {user?.uname}</p>
-            <p><strong>Email:</strong> {user?.email}</p>
-          </>
+          <div className={`min-h-screen ${isDarkTheme ? "bg-gray-900 text-white" : " text-gray-900 font-mono"}`}>
+      <div className="max-w-4xl mx-auto grid grid-cols-3 gap-4">
+        {/* Profile Card */}
+        <h2 className="col-span-5 text-3xl font-bold mb-4">Profile Page</h2>
+        <Card className="flex justify-around col-span-3 items-center gap-4 p-6 rounded-2xl shadow-md bg-white dark:bg-[#393939]">
+          <div className="flex flex-col">
+            <div className="relative w-40 h-40 flex items-center justify-center rounded-full border-4 border-gray-300 bg-gray-200 text-4xl font-bold text-gray-600">
+              {user?.uname ? user.uname.slice(0, 2).toUpperCase() : "NA"}
+            </div>
+            <div className="flex justify-center items-center gap-1 text-xl font-semibold mt-2">
+              {user?.uname}
+            </div>
+          </div>
+          {/* Info Section */}
+          <div className="text-xl flex flex-col gap-2">
+            <div className="flex gap-2 items-center">
+              <span className="font-semibold">Username:</span>
+              <span>{user?.uname}</span>
+            </div>
+            <div className="flex gap-2 items-center">
+              <span className="font-semibold">Email:</span>
+              <span>{user?.email}</span>
+            </div>
+          </div>
+
+        </Card>
+
+        {/* Favourites Section */}
+        <Card className="dark:bg-gray-700 p-6 col-span-3 items-center rounded-2xl shadow-md bg-white">
+          <CardContent>
+            <h3 className="text-xl font-semibold mb-3 ">Favourites</h3>
+            {favouriteCount==0 ? 
+              <p className="text-gray-500">You haven't added any favourites yet.</p> : 
+              <Carousel title="" items={carouselItems} isLandingPage={true} />
+            }
+          </CardContent>
+        </Card>
+      </div>
+    </div>
         )}
       </div>
     </div>
