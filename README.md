@@ -15,15 +15,15 @@
 *The `users` and `favourites` relations have no starting data and will be filled by the application at runtime*
 
 ## Run the application 
-1. cd ./Backend
-   - npm install
-   - npm start
-2. cd ./frontend
-   - npm install
-   - npm run build
-   - npm run dev
-   - open the localhost url in browser
+1. `cd ./Backend`
+   - `npm install`
+   - `npm start`
+2. `cd ./frontend`
+   - `npm install`
+   - `npm run build`
+   - `npm run dev`
+   - *open the localhost url in browser*
 
-*If issues arise, check that ./Backend/.env has proper credentials*
+*If issues arise, check that `./Backend/.env` has the proper credentials*
 
-https://www.kaggle.com/code/isaienkov/basketball-players-stats-extended-analysis/input
+[Dataset](https://www.kaggle.com/code/isaienkov/basketball-players-stats-extended-analysis/input)
