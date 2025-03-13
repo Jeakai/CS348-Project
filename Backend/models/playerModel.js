@@ -21,6 +21,8 @@ exports.getPlayers = async (search, sortBy, order, groupBy) => {
   console.log("SQL", sql);
   console.log("params", params);
   const [rows] = await pool.execute(sql, params);
+
+  console.log("playerModel:", rows);
   return rows;
 };
 
