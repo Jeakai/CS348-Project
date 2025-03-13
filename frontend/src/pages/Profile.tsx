@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Switch } from "../components/ui/switch";
 import { CameraIcon, PencilIcon } from "lucide-react";
 
