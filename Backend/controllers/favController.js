@@ -10,21 +10,23 @@ exports.getUserFavourites = async (req, res, next) => {
   }
 };
 
-exports.updateUserFavourites = async (req, res, next) => {
-  let connection;
+exports.addFavourite = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const { playerIds } = req.body;
-    if (!Array.isArray(playerIds)) {
-      return res.status(400).json({ error: 'playerIds should be an array' });
-    }
-    connection = await favouriteModel.getConnection();
-    await favouriteModel.updateUserFavourites(connection, id, playerIds);
-    res.json({ message: 'Favourites updated' });
+    const { uid } = req.params;
+    const { pid } = req.body; // We expect { pid: number } in the request
+    await favouriteModel.addFavourite(uid, pid);
+    res.json({ message: 'Favourite added successfully' });
   } catch (error) {
-    if (connection) await connection.rollback();
     next(error);
-  } finally {
-    if (connection) connection.release();
+  }
+};
+
+exports.removeFavourite = async (req, res, next) => {
+  try {
+    const { uid, pid } = req.params;
+    await favouriteModel.removeFavourite(uid, pid);
+    res.json({ message: 'Favourite removed successfully' });
+  } catch (error) {
+    next(error);
   }
 };

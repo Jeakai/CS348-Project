@@ -6,7 +6,11 @@ interface LoginResponse {
   token: string;
 }
 
-const Login = () => {
+interface LoginProps {
+  handleLogin?: (token: string) => void;
+}
+
+const Login: React.FC<LoginProps> = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -38,19 +42,22 @@ const Login = () => {
       const { token } = response.data;
       if (token) {
         localStorage.setItem("authToken", token); // Store the token
+        // Call handleLogin so the parent can update its state
+        if (handleLogin) {
+          handleLogin(token);
+        }
         console.log("Login successful");
-        navigate("/mainpage"); // Navigate to the main page or dashboard
+        navigate("/mainpage");
       } else {
         setError("Token not received. Please try again.");
       }
-    } catch (err: unknown) {  // ✅ Changed from 'any' to 'unknown'
-      if ((err as any)?.response?.data?.error) {  // ✅ Manually asserting the error type
+    } catch (err: unknown) {
+      if ((err as any)?.response?.data?.error) {
         setError((err as any).response.data.error);
       } else {
         setError("An unknown error occurred.");
       }
     }
-    
   };
 
   return (
