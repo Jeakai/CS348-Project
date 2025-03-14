@@ -36,7 +36,7 @@ const Card: React.FC<CardProps> = ({
   const handleFavoriteClick = async (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent card onClick from firing
     const newLikedState = !liked;
-    try {
+    try { // TODO: Single call to toggle favourite using transaction in backend
       const token = localStorage.getItem("authToken");
       if (newLikedState) {
         // Add favourite via POST

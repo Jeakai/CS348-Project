@@ -14,7 +14,10 @@ const players = [
     position: "Forward",
     description: "Los Angeles Lakers",
     age: 38,
-    image: "assets/Lebron.jpg"
+    image: "assets/Lebron.jpg",
+    height: 203,
+    weight: 113,
+    points: 27
   },
   {
     pid: 112,
@@ -22,7 +25,10 @@ const players = [
     position: "Guard",
     description: "Golden State Warriors",
     age: 35,
-    image: "assets/Steph.avif"
+    image: "assets/Steph.avif",
+    height: 191,
+    weight: 84,
+    points: 30
   },
   {
     pid: 113,
@@ -30,7 +36,10 @@ const players = [
     position: "Forward",
     description: "Phoenix Suns",
     age: 34,
-    image: "assets/Kevin.jpg"
+    image: "assets/Kevin.jpg",
+    height: 208,
+    weight: 109,
+    points: 28
   },
   {
     pid: 114,
@@ -38,7 +47,10 @@ const players = [
     position: "Forward",
     description: "Milwaukee Bucks",
     age: 28,
-    image: "assets/Giannis.jpg"
+    image: "assets/Giannis.jpg",
+    height: 211,
+    weight: 110,
+    points: 29
   },
   {
     pid: 115,
@@ -46,7 +58,10 @@ const players = [
     position: "Center",
     description: "San Antonio Spurs",
     age: 19,
-    image: "assets/wemby.jpg"
+    image: "assets/wemby.jpg",
+    height: 220,
+    weight: 90,
+    points: 15
   },
   {
     pid: 116,
@@ -54,7 +69,10 @@ const players = [
     position: "Guard",
     description: "Dallas Mavericks",
     age: 24,
-    image: "assets/Luka.jpg"
+    image: "assets/Luka.jpg",
+    height: 201,
+    weight: 104,
+    points: 28
   },
   {
     pid: 117,
@@ -62,7 +80,10 @@ const players = [
     position: "Center",
     description: "Philadelphia 76ers",
     age: 29,
-    image: "assets/Embiid.jpg"
+    image: "assets/Embiid.jpg",
+    height: 213,
+    weight: 127,
+    points: 30
   },
   {
     pid: 118,
@@ -70,7 +91,10 @@ const players = [
     position: "Center",
     description: "Denver Nuggets",
     age: 28,
-    image: "assets/Jokic.avif"
+    image: "assets/Jokic.avif",
+    height: 211,
+    weight: 116,
+    points: 26
   },
   {
     pid: 119,
@@ -78,7 +102,10 @@ const players = [
     position: "Forward",
     description: "Boston Celtics",
     age: 25,
-    image: "assets/Tatum.jpg"
+    image: "assets/Tatum.jpg",
+    height: 203,
+    weight: 95,
+    points: 25
   },
   {
     pid: 120,
@@ -86,7 +113,10 @@ const players = [
     position: "Guard",
     description: "Phoenix Suns",
     age: 26,
-    image: "assets/Booker.jpg"
+    image: "assets/Booker.jpg",
+    height: 198,
+    weight: 95,
+    points: 24
   },
   {
     pid: 121,
@@ -94,7 +124,10 @@ const players = [
     position: "Guard",
     description: "Memphis Grizzlies",
     age: 23,
-    image: "assets/Morant.jpg"
+    image: "assets/Morant.jpg",
+    height: 196,
+    weight: 79,
+    points: 22
   },
   {
     pid: 122,
@@ -102,16 +135,25 @@ const players = [
     position: "Forward",
     description: "Miami Heat",
     age: 33,
-    image: "assets/Butler.avif"
+    image: "assets/Butler.avif",
+    height: 201,
+    weight: 102,
+    points: 21
   }
 ];
+// console.log("players:", players);
 
 const carouselPlayers = players.map((player) => ({
   pid: player.pid,
   title: player.title,
   image: player.image,
   description: player.description,
+  age: player.age,
+  height: player.height,
+  weight: player.weight,
+  points: player.points
 }));
+// console.log("carouselPlayers:", carouselPlayers);
 
 const teams = [
   { tid: 101, title: "Los Angeles Lakers", image: "assets/LA Lakers.jpg", description: "Western Conference" },
@@ -176,10 +218,26 @@ const Mainpage: React.FC<MainpageProps> = ({ user }) => {
 
   const favPids = favourites.map((f: any) => f.pid);
 
-  const carouselPlayersWithFav = carouselPlayers.map((p) => ({
-    ...p,
-    isFavorited: favPids.includes(p.pid),
-  }));
+  interface CarouselPlayer {
+    pid: number;
+    title: string;
+    image: string;
+    description: string;
+    isFavorited: boolean;
+    age: number;
+    height: number;
+    weight: number;
+    points: number;
+  }
+  
+  const [carouselPlayersWithFav, setPlayers] = useState<CarouselPlayer[]>([]);
+
+  useEffect(() => {
+    setPlayers(carouselPlayers.map((p) => ({
+        ...p,
+        isFavorited: favPids.includes(p.pid),
+    })));
+  }, [carouselPlayers, favourites]);
 
   // For card click
   const onClickPlayer = (p: { pid: number; title: string; image: string; description: string }) => {
@@ -197,6 +255,10 @@ const Mainpage: React.FC<MainpageProps> = ({ user }) => {
         show={showPlayerModal}
         handleClose={() => setShowPlayerModal(false)}
         player={player}
+        setPlayer={setPlayer}
+        uid={user && user.uid ? Number(user.uid) : 0}
+        players={carouselPlayersWithFav}
+        setPlayers={setPlayers}
       />
       <div className="flex flex-col items-center justify-center min-h-screen text-center font-mono">
         {/* Title Section */}
