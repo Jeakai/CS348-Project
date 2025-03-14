@@ -1,0 +1,41 @@
+uid	uname	hashed_password	email
+1	hoopfan99	$2b$12$nC2ZlrPrFKdaIOPMd1XSH.QLgso5KwqdNDM/FNOXas84X4qa4Atgi	hoopfan99@example.com
+pid	pname	birth_year	birth_month	birth_date	nationality	high_school	draft_round	draft_pick	draft_tid
+0	Shaquille O'Neal	1972	Mar	1972-03-06	United States	Robert G. Cole High School 	1	1	116
+45244	Shaquille Harrison	1993	Oct	1993-10-06	United States	Lee's Summit High School	NULL	NULL	NULL
+pname	threepm
+Stephen Curry	402
+James Harden	378
+Stephen Curry	354
+Stephen Curry	324
+James Harden	299
+uid	pid
+1	126
+tid	team	abbreviation	pid	player_name	season	pts
+127	Los Angeles Lakers	LAL	0	Shaquille O'Neal	1999 - 2000	3051
+127	Los Angeles Lakers	LAL	24	Kobe Bryant	2005 - 2006	3027
+127	Los Angeles Lakers	LAL	24	Kobe Bryant	2007 - 2008	2956
+127	Los Angeles Lakers	LAL	24	Kobe Bryant	2008 - 2009	2896
+127	Los Angeles Lakers	LAL	24	Kobe Bryant	2002 - 2003	2846
+127	Los Angeles Lakers	LAL	24	Kobe Bryant	2009 - 2010	2641
+127	Los Angeles Lakers	LAL	0	Shaquille O'Neal	2000 - 2001	2612
+127	Los Angeles Lakers	LAL	24	Kobe Bryant	2006 - 2007	2594
+127	Los Angeles Lakers	LAL	24	Kobe Bryant	2001 - 2002	2525
+127	Los Angeles Lakers	LAL	24	Kobe Bryant	2000 - 2001	2409
+127	Los Angeles Lakers	LAL	0	Shaquille O'Neal	2001 - 2002	2363
+127	Los Angeles Lakers	LAL	24	Kobe Bryant	2010 - 2011	2306
+127	Los Angeles Lakers	LAL	2760	LeBron James	2019 - 2020	2278
+127	Los Angeles Lakers	LAL	26819	Anthony Davis	2019 - 2020	2200
+127	Los Angeles Lakers	LAL	0	Shaquille O'Neal	2002 - 2003	2165
+tid	team	abbreviation	pid	player_name	season	pts
+127	Los Angeles Lakers	LAL	24	Kobe Bryant	2003 - 2004	2096
+127	Los Angeles Lakers	LAL	0	Shaquille O'Neal	2003 - 2004	1912
+127	Los Angeles Lakers	LAL	4	Gary Payton	2003 - 2004	1370
+127	Los Angeles Lakers	LAL	163	Derek Fisher	2003 - 2004	746
+127	Los Angeles Lakers	LAL	1156	Devean George	2003 - 2004	725
+127	Los Angeles Lakers	LAL	1198	Slava Medvedenko	2003 - 2004	646
+127	Los Angeles Lakers	LAL	1887	Kareem Rush	2003 - 2004	541
+127	Los Angeles Lakers	LAL	52	Bryon Russell	2003 - 2004	289
+127	Los Angeles Lakers	LAL	2	Karl Malone	2003 - 2004	242
+127	Los Angeles Lakers	LAL	2948	Luke Walton	2003 - 2004	206
+127	Los Angeles Lakers	LAL	151	Rick Fox	2003 - 2004	18
