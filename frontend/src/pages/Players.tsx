@@ -56,7 +56,7 @@ const Players = () => {
         });
         setPlayers(response.data);
         setError("");
-        setLoading(false);
+        setLoading(false);  
       } catch (err) {
         setError("Failed to fetch players data.");
         setLoading(false);
