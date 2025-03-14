@@ -1,25 +1,26 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, CardContent } from "../components/ui/card";
+import { useEffect, useState } from "react";
 import Carousel from "../components/Carousel";
+import PlayerModal from "../components/PlayerModal";
+import { Card, CardContent } from "../components/ui/card";
 
 interface ProfileProps {
   user: { uid: number | string; [key: string]: any };
 }
 
 const players = [
-  { pid: 111, title: "LeBron James", position: "Forward", description: "Los Angeles Lakers", age: 38, image: "assets/Lebron.jpg" },
-  { pid: 112, title: "Stephen Curry", position: "Guard", description: "Golden State Warriors", age: 35, image: "assets/Steph.avif" },
-  { pid: 113, title: "Kevin Durant", position: "Forward", description: "Phoenix Suns", age: 34, image: "assets/Kevin.jpg" },
-  { pid: 114, title: "Giannis Antetokounmpo", position: "Forward", description: "Milwaukee Bucks", age: 28, image: "assets/Giannis.jpg" },
-  { pid: 115, title: "Victor Wembanyama", position: "Center", description: "San Antonio Spurs", age: 19, image: "assets/wemby.jpg" },
-  { pid: 116, title: "Luka Dončić", position: "Guard", description: "Dallas Mavericks", age: 24, image: "assets/Luka.jpg" },
-  { pid: 117, title: "Joel Embiid", position: "Center", description: "Philadelphia 76ers", age: 29, image: "assets/Embiid.jpg" },
-  { pid: 118, title: "Nikola Jokić", position: "Center", description: "Denver Nuggets", age: 28, image: "assets/Jokic.avif" },
-  { pid: 119, title: "Jayson Tatum", position: "Forward", description: "Boston Celtics", age: 25, image: "assets/Tatum.jpg" },
-  { pid: 120, title: "Devin Booker", position: "Guard", description: "Phoenix Suns", age: 26, image: "assets/Booker.jpg" },
-  { pid: 121, title: "Ja Morant", position: "Guard", description: "Memphis Grizzlies", age: 23, image: "assets/Morant.jpg" },
-  { pid: 122, title: "Jimmy Butler", position: "Forward", description: "Miami Heat", age: 33, image: "assets/Butler.avif" }
+  { pid: 111, title: "LeBron James", description: "Los Angeles Lakers", age: 38, image: "assets/Lebron.jpg", height: 203, weight: 113, points: 27 },
+  { pid: 112, title: "Stephen Curry", description: "Golden State Warriors", age: 35, image: "assets/Steph.avif", height: 191, weight: 84, points: 30 },
+  { pid: 113, title: "Kevin Durant", description: "Phoenix Suns", age: 34, image: "assets/Kevin.jpg", height: 208, weight: 109, points: 28 },
+  { pid: 114, title: "Giannis Antetokounmpo", description: "Milwaukee Bucks", age: 28, image: "assets/Giannis.jpg", height: 211, weight: 110, points: 29 },
+  { pid: 115, title: "Victor Wembanyama", description: "San Antonio Spurs", age: 19, image: "assets/wemby.jpg", height: 220, weight: 90, points: 15 },
+  { pid: 116, title: "Luka Dončić", description: "Dallas Mavericks", age: 24, image: "assets/Luka.jpg", height: 201, weight: 104, points: 28 },
+  { pid: 117, title: "Joel Embiid", description: "Philadelphia 76ers", age: 29, image: "assets/Embiid.jpg", height: 213, weight: 127, points: 30 },
+  { pid: 118, title: "Nikola Jokić", description: "Denver Nuggets", age: 28, image: "assets/Jokic.avif", height: 211, weight: 116, points: 26 },
+  { pid: 119, title: "Jayson Tatum", description: "Boston Celtics", age: 25, image: "assets/Tatum.jpg", height: 203, weight: 95, points: 25 },
+  { pid: 120, title: "Devin Booker", description: "Phoenix Suns", age: 26, image: "assets/Booker.jpg", height: 198, weight: 95, points: 24 },
+  { pid: 121, title: "Ja Morant", description: "Memphis Grizzlies", age: 23, image: "assets/Morant.jpg", height: 196, weight: 79, points: 22 },
+  { pid: 122, title: "Jimmy Butler", description: "Miami Heat", age: 33, image: "assets/Butler.avif", height: 201, weight: 102, points: 21 }
 ];
 
 const carouselPlayers = players.map((player) => ({
@@ -98,15 +99,58 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
   
 
   // Transform favourites for Carousel
-  const carouselItems = favourites.map((player: any) => ({
-    pid: player.pid,
-    title: player.pname,
-    image: player.image || "",
-    description: player.team || "",
-    isFavorited: favourites.some(fav => fav.pid === player.pid),
-  }));
+  // const carouselItems = favourites.map((player: any) => ({
+  //   pid: player.pid,
+  //   title: player.pname,
+  //   image: player.image || "",
+  //   description: player.team || "",
+  //   isFavorited: favourites.some(fav => fav.pid === player.pid),
+  // }));
 
-  return (
+  interface CarouselPlayer {
+    pid: number;
+    title: string;
+    image: string;
+    description: string;
+    isFavorited: boolean;
+    age: number;
+    height: number;
+    weight: number;
+    points: number;
+  }
+  const [carouselItems, setPlayers] = useState<CarouselPlayer[]>([]);
+
+  useEffect(() => {
+    setPlayers(favourites.map((player: any) => ({
+      pid: player.pid,
+      title: player.pname,
+      image: player.image || "",
+      description: player.team || "",
+      isFavorited: favourites.some(fav => fav.pid === player.pid),
+      age: player.age || 0,
+      height: player.height || 0,
+      weight: player.weight || 0,
+      points: player.points || 0,
+    })));
+  }, [carouselPlayers, favourites]);
+
+  // For card click
+  const onClickPlayer = (p: { pid: number; title: string; image: string; description: string }) => {
+    console.log("Player clicked!", p);
+    setShowPlayerModal(true);
+    setPlayer(p);
+  };
+
+  return (<>
+    <PlayerModal
+      show={showPlayerModal}
+      handleClose={() => setShowPlayerModal(false)}
+      player={player}
+      setPlayer={setPlayer}
+      uid={user && user.uid ? Number(user.uid) : 0}
+      players={carouselItems}
+      setPlayers={setPlayers}
+    />
     <div className="min-h-screen bg-gray-100 p-5 m-0">
       <div className="p-5">
         {loading ? (
@@ -173,7 +217,8 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
                       title=""
                       uid={user && user.uid ? Number(user.uid) : 0}
                       items={carouselItems}
-                      isLandingPage={true}
+                      // isLandingPage={true}
+                      onClick={onClickPlayer}
                     />
                   )}
                 </CardContent>
@@ -183,7 +228,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         )}
       </div>
     </div>
-  );
+  </>);
 };
 
 export default Profile;

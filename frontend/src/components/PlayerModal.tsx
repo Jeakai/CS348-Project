@@ -76,7 +76,7 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ show, handleClose, player, se
                 <div style={{ display: 'flex', justifyContent: 'center', textAlign: 'center', flexDirection: 'column', alignItems: 'center' }}>
                     <img 
                         src={player.image || "https://via.placeholder.com/150"} 
-                        alt="Player" 
+                        alt="Player Image" 
                         style={{ width: '150px', height: '150px', borderRadius: '50%' }} 
                     />
                     <h3>{player.title}</h3>
