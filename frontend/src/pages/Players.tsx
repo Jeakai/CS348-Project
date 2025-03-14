@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios for making API calls
 
+interface PlayerProps {
+  user: { uid: number | string; [key: string]: any };
+}
+
 interface Player {
   pname: string;
   season: string;
@@ -30,7 +34,7 @@ interface Player {
   draft_pick: number;
 }
 
-const Players = () => {
+const Players: React.FC<PlayerProps> = ({ user }) => {
   // State for players data, loading status, and error message
   const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState<boolean>(true);

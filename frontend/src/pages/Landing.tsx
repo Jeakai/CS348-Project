@@ -5,11 +5,11 @@ import Carousel from "../components/Carousel";
 
 
 const display = [
-  { title: "LeBron James", image: "assets/Lebron.jpg", description: "Los Angeles Lakers" },
-  { title: "Stephen Curry", image: "assets/Steph.avif", description: "Golden State Warriors" },
-  { title: "Kevin Durant", image: "assets/Kevin.jpg", description: "Phoenix Suns" },
-  { title: "Giannis Antetokounmpo", image: "assets/Giannis.jpg", description: "Milwaukee Bucks" },
-  { title: "Luka Dončić", image: "assets/Luka.jpg", description: "Dallas Mavericks" }
+  { pid: 111, title: "LeBron James", image: "assets/Lebron.jpg", description: "Los Angeles Lakers" },
+  { pid: 112, title: "Stephen Curry", image: "assets/Steph.avif", description: "Golden State Warriors" },
+  { pid: 113, title: "Kevin Durant", image: "assets/Kevin.jpg", description: "Phoenix Suns" },
+  { pid: 114, title: "Giannis Antetokounmpo", image: "assets/Giannis.jpg", description: "Milwaukee Bucks" },
+  { pid: 115, title: "Luka Dončić", image: "assets/Luka.jpg", description: "Dallas Mavericks" }
 ];
 
 const Landing = () => {
@@ -37,7 +37,7 @@ return (
       </button>
 
       {/* Display Section */}
-      <Carousel title="" items={display} isLandingPage={true} />
+      <Carousel uid={0} title="" items={display} isLandingPage={true} />
     </div>
   );
 };

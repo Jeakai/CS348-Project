@@ -14,12 +14,12 @@ exports.getConnection = async () => {
   return await pool.getConnection();
 };
 
-exports.updateUserFavourites = async (connection, userId, playerIds) => {
-  await connection.beginTransaction();
-  await connection.execute('DELETE FROM favourites WHERE uid = ?', [userId]);
-  const sql = 'INSERT INTO favourites (uid, pid) VALUES (?, ?)';
-  for (const playerId of playerIds) {
-    await connection.execute(sql, [userId, playerId]);
-  }
-  await connection.commit();
+exports.addFavourite = async (uid, pid) => {
+  const sql = 'INSERT IGNORE INTO favourites (uid, pid) VALUES (?, ?)';
+  await pool.execute(sql, [uid, pid]);
+};
+
+exports.removeFavourite = async (uid, pid) => {
+  const sql = 'DELETE FROM favourites WHERE uid = ? AND pid = ?';
+  await pool.execute(sql, [uid, pid]);
 };

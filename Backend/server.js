@@ -28,6 +28,7 @@ app.use(cors({
     'Access-Control-Allow-Headers',
     'Access-Control-Request-Method',
     'Access-Control-Request-Headers'
+    
   ],
   credentials: true
 }));
