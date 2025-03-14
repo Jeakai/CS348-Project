@@ -23,3 +23,15 @@ exports.removeFavourite = async (uid, pid) => {
   const sql = 'DELETE FROM favourites WHERE uid = ? AND pid = ?';
   await pool.execute(sql, [uid, pid]);
 };
+
+// exports.toggleUserFavourite = async (connection, userId, playerId) => {
+//   await connection.beginTransaction();
+//   const sql = `
+//     DELETE FROM favourites 
+//     WHERE uid = ? AND pid = ?`;
+//   const [rows] = await connection.execute(sql, [userId, playerId]);
+//   if (rows.affectedRows === 0) {
+//     await connection.execute('INSERT INTO favourites (uid, pid) VALUES (?, ?)', [userId, playerId]);
+//   }
+//   await connection.commit();
+// };

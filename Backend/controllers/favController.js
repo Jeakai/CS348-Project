@@ -30,3 +30,19 @@ exports.removeFavourite = async (req, res, next) => {
     next(error);
   }
 };
+
+// exports.toggleUserFavourite = async (req, res, next) => {
+//   let connection;
+//   try {
+//     const { id } = req.params;
+//     const { playerId } = req.body;
+//     connection = await favouriteModel.getConnection();
+//     await favouriteModel.toggleUserFavourite(connection, id, playerId);
+//     res.json({ message: 'Favourite toggled' });
+//   } catch (error) {
+//     if (connection) await connection.rollback();
+//     next(error);
+//   } finally {
+//     if (connection) connection.release();
+//   }
+// };
