@@ -3,18 +3,90 @@ import Carousel from "../components/Carousel";
 import PlayerModal from "../components/PlayerModal";
 
 const players = [
-  { title: "LeBron James", image: "assets/Lebron.jpg", description: "Los Angeles Lakers" },
-  { title: "Stephen Curry", image: "assets/Steph.avif", description: "Golden State Warriors" },
-  { title: "Kevin Durant", image: "assets/Kevin.jpg", description: "Phoenix Suns" },
-  { title: "Giannis Antetokounmpo", image: "assets/Giannis.jpg", description: "Milwaukee Bucks" },
-  { title: "Victor Wembanyama", image: "assets/wemby.jpg", description: "San Antonio Spurs" },
-  { title: "Luka Dončić", image: "assets/Luka.jpg", description: "Dallas Mavericks" },
-  { title: "Joel Embiid", image: "assets/Embiid.jpg", description: "Philadelphia 76ers" },
-  { title: "Nikola Jokić", image: "assets/Jokic.avif", description: "Denver Nuggets" },
-  { title: "Jayson Tatum", image: "assets/Tatum.jpg", description: "Boston Celtics" },
-  { title: "Devin Booker", image: "assets/Booker.jpg", description: "Phoenix Suns" },
-  { title: "Ja Morant", image: "assets/Morant.jpg", description: "Memphis Grizzlies" },
-  { title: "Jimmy Butler", image: "assets/Butler.avif", description: "Miami Heat" }
+  {
+    name: "LeBron James",
+    position: "Forward",
+    team: "Los Angeles Lakers",
+    age: 38,
+    image: "assets/Lebron.jpg"
+  },
+  {
+    name: "Stephen Curry",
+    position: "Guard",
+    team: "Golden State Warriors",
+    age: 35,
+    image: "assets/Steph.avif"
+  },
+  {
+    name: "Kevin Durant",
+    position: "Forward",
+    team: "Phoenix Suns",
+    age: 34,
+    image: "assets/Kevin.jpg"
+  },
+  {
+    name: "Giannis Antetokounmpo",
+    position: "Forward",
+    team: "Milwaukee Bucks",
+    age: 28,
+    image: "assets/Giannis.jpg"
+  },
+  {
+    name: "Victor Wembanyama",
+    position: "Center",
+    team: "San Antonio Spurs",
+    age: 19,
+    image: "assets/wemby.jpg"
+  },
+  {
+    name: "Luka Dončić",
+    position: "Guard",
+    team: "Dallas Mavericks",
+    age: 24,
+    image: "assets/Luka.jpg"
+  },
+  {
+    name: "Joel Embiid",
+    position: "Center",
+    team: "Philadelphia 76ers",
+    age: 29,
+    image: "assets/Embiid.jpg"
+  },
+  {
+    name: "Nikola Jokić",
+    position: "Center",
+    team: "Denver Nuggets",
+    age: 28,
+    image: "assets/Jokic.avif"
+  },
+  {
+    name: "Jayson Tatum",
+    position: "Forward",
+    team: "Boston Celtics",
+    age: 25,
+    image: "assets/Tatum.jpg"
+  },
+  {
+    name: "Devin Booker",
+    position: "Guard",
+    team: "Phoenix Suns",
+    age: 26,
+    image: "assets/Booker.jpg"
+  },
+  {
+    name: "Ja Morant",
+    position: "Guard",
+    team: "Memphis Grizzlies",
+    age: 23,
+    image: "assets/Morant.jpg"
+  },
+  {
+    name: "Jimmy Butler",
+    position: "Forward",
+    team: "Miami Heat",
+    age: 33,
+    image: "assets/Butler.avif"
+  }
 ];
 
 const teams = [
@@ -35,7 +107,13 @@ const teams = [
 
 const Mainpage = () => {
   const [showPlayerModal, setShowPlayerModal] = useState(false);
-  const [player, setPlayer] = useState({ title: "", image: "", description: "" });
+  const [player, setPlayer] = useState({ 
+    name: "", 
+    position: "", 
+    team: "",
+    age: 0,
+    image: ""
+  });
 
   const onClickPlayer = (p: { title: string; image: string; description: string }) => {
     console.log("Player clicked!", p);
@@ -44,7 +122,14 @@ const Mainpage = () => {
   };
 
   return (<>
-    <PlayerModal show={showPlayerModal} handleClose={() => setShowPlayerModal(false)} player={player} />
+    <PlayerModal
+        show={showPlayerModal}
+        handleClose={() => setShowPlayerModal(false)}
+        handleAddFavorite={()=>{
+          console.log("Hi");
+        }}
+        player={player}
+      />
     <div className="flex flex-col items-center justify-center min-h-screen text-center font-mono">
 
       {/* Title Section */}

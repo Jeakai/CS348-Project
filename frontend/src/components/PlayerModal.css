@@ -5,60 +5,66 @@
     width: 100%;
     height: 100%;
     display: flex;
+    /* The following line was making the entire page a backdrop.
+       If you prefer to rely on react-bootstrap's default backdrop,
+       you can remove or comment out these lines. */
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1050;
     overflow: hidden;
-}
-
-.custom-modal .modal-content {
+  }
+  
+  /* Ensure the modal content is centered and has some styling */
+  .custom-modal .modal-content {
     position: relative;
     z-index: 1060;
-}
-
-.custom-modal .modal-content {
     border-radius: 15px;
     padding: 20px;
     background-color: #f8f9fa;
-}
-
-.custom-modal .modal-header {
+  }
+  
+  .custom-modal .modal-header {
     border-bottom: none;
     text-align: center;
-}
-
-.custom-modal .modal-title {
+  }
+  
+  .custom-modal .modal-title {
     font-size: 24px;
     font-weight: bold;
-}
-
-.custom-modal .modal-body {
+  }
+  
+  .custom-modal .modal-body {
     padding: 20px;
-}
-
-.custom-modal .modal-body img {
+  }
+  
+  .custom-modal .modal-body img {
     margin-bottom: 15px;
-}
-
-.custom-modal .modal-body h3 {
+  }
+  
+  .custom-modal .modal-body h3 {
     margin-top: 10px;
     font-size: 22px;
     font-weight: bold;
-}
-
-.custom-modal .modal-body p {
+  }
+  
+  .custom-modal .modal-body p {
     margin: 5px 0;
     font-size: 16px;
-}
-
-.custom-modal .modal-footer {
+  }
+  
+  .custom-modal .modal-footer {
     border-top: none;
     display: flex;
     justify-content: center;
-}
-
-.custom-modal .modal-footer .btn-secondary {
+  }
+  
+  .custom-modal .modal-footer .btn-primary {
+    margin-right: 1rem;
+  }
+  
+  .custom-modal .modal-footer .btn-secondary {
     background-color: #6c757d;
     border-color: #6c757d;
-}
+  }
+  

@@ -7,10 +7,19 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface CarouselProps {
   title: string;
-  items: { title: string; image: string; description: string }[];
-  isLandingPage?: boolean; // Add this prop to identify the landing page
-  onClick?: (item: { title: string; image: string; description: string }) => void; // Add this prop to handle click events
+  items: {
+    title: string;
+    image: string;
+    description: string;
+  }[];
+  isLandingPage?: boolean;
+  onClick?: (item: {
+    title: string;
+    image: string;
+    description: string;
+  }) => void;
 }
+
 
 const Carousel: React.FC<CarouselProps> = ({ title, items, isLandingPage = false, onClick = () => {} }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
