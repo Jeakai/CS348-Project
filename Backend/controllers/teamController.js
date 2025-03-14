@@ -11,7 +11,9 @@ exports.getTeams = async (req, res, next) => {
 
 exports.getTeamDetails = async(req, res, next) => {
   const teamAbbr = req.params.abbr;
-  
+  const searchQuery =  req.query.search? req.query.search.toLowerCase(): '';
+  const seasonQuery = req.query.season? req.query.season: '';
+
   try{
     console.log("Fetching details for team:", teamAbbr);
 
@@ -21,15 +23,13 @@ exports.getTeamDetails = async(req, res, next) => {
 
     console.log("Received team abbreviation:", teamAbbr);
 
-    const teamDetails = await teamModel.getTeamDetails(teamAbbr);
+    const teamDetails = await teamModel.getTeamDetails(teamAbbr, searchQuery, seasonQuery);
     
+    //console.log("Received teamDetails from model:", teamDetails);
+
     if(!teamDetails){
       return res.status(404).json({ error:"Team not found."});
     }
-
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
     
     res.json(teamDetails);
   } catch (error){
