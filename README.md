@@ -51,7 +51,7 @@
 
 ### Feature 6 - Players from team (current & old)
 - [Teams.tsx](./frontend/src/pages/Teams.tsx)
-- [TeamDetails.tsx](./frontend/src/pages/TeamDetails/tsx)
+- [TeamDetails.tsx](./frontend/src/pages/TeamDetails.tsx)
 - [teamRoutes.js](./Backend/routes/teamRoutes.js)
 - [teamController.js](./Backend/controllers/teamController.js)
 - [teamModel.js](./Backend/models/teamModel.js)
