@@ -22,8 +22,36 @@
    - `npm install`
    - `npm run build`
    - `npm run dev`
-   - *open the localhost url in browser*
+   - *Open the localhost url in browser with port number 3000. If a fetching error occurs, try removing the auth token by opening the console, clicking on the `Application` tab and looking in the `Local storage` tab. If all else fails, try port number 5137*
 
 *If issues arise, check that `./Backend/.env` has the proper credentials*
+*Additionally, *
 
-[Dataset](https://www.kaggle.com/code/isaienkov/basketball-players-stats-extended-analysis/input)
+## Implemented Features
+### Feature 1 -  User Registration
+- [Signup.tsx](./frontend/src/pages/Signup.tsx)
+- [authRoutes.js](./Backend/routes/authRoutes.js)
+- [authController.js](./Backend/controllers/authController.js)
+- [userModel.js](./Backend/models/userModel.js)
+
+### Feature 2 - User Login
+- [Login.tsx](./frontend/src/pages/Login.tsx)
+- [authRoutes.js](./Backend/routes/authRoutes.js)
+- [authController.js](./Backend/controllers/authController.js)
+- [userModel.js](./Backend/models/userModel.js)
+
+### Feature 3 - Player Search
+- [Players.tsx](./frontend/src/pages/Players.tsx)
+- [playerRoutes.js](./Backend/routes/playerRoutes.js)
+- [playerController.js](./Backend/controllers/playerController.js)
+- [playerModel.js](./Backend/models/playerModel.js)
+
+### Feature 4 - Player Sorting
+*Same files as feature 3*
+
+### Feature 6 - Players from team (current & old)
+- [Teams.tsx](./frontend/src/pages/Teams.tsx)
+- [TeamDetails.tsx](./frontend/src/pages/TeamDetails/tsx)
+- [teamRoutes.js](./Backend/routes/teamRoutes.js)
+- [teamController.js](./Backend/controllers/teamController.js)
+- [teamModel.js](./Backend/models/teamModel.js)
