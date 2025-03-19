@@ -43,16 +43,26 @@ const App = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
-      } catch (error) {
-        setError("Error fetching user data");
-        console.error("Error fetching user:", error);
+      } catch (error: any) {
+        // Check if error indicates an invalid/expired token
+        if (error.response && error.response.data && error.response.data.error === 'Invalid token') {
+          // Remove the expired token before redirecting
+          localStorage.removeItem("authToken");
+          // Redirect to the landing page
+          window.location.href = '/'; // Ensure the landing page does not trigger a re-fetch that redirects again
+        } else {
+          setError("Error fetching user data");
+          console.error("Error fetching user:", error);
+        }
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchUser();
   }, [token]);
+  
+  
 
   // Pass a handleLogin function to Login page so that it updates token state.
   const handleLogin = (newToken: string) => {
