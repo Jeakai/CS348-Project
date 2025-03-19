@@ -46,6 +46,7 @@ const Card: React.FC<CardProps> = ({
         console.log("Favourite added successfully");
       } else {
         // Remove favourite via DELETE
+        //problem starts here
         await axios.delete(`http://localhost:3000/api/favourites/${uid}/${pid}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
