@@ -28,10 +28,10 @@ app.use(cors({
     'X-Requested-With',
     'Content-Type',
     'Accept',
+    'Authorization',
     'Access-Control-Allow-Headers',
     'Access-Control-Request-Method',
     'Access-Control-Request-Headers'
-    
   ],
   credentials: true
 }));
