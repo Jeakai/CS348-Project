@@ -129,7 +129,7 @@ const Mainpage: React.FC<MainpageProps> = ({ user }) => {
         ...p,
         isFavourited: favPids.includes(p.pid),
     })));
-  }, [carouselPlayersWithFav, favourites]);
+  }, [favourites]);
 
   // For card click
   const onClickPlayer = (p: { pid: number; title: string; image: string; description: string }) => {
@@ -167,6 +167,12 @@ const Mainpage: React.FC<MainpageProps> = ({ user }) => {
           items={carouselPlayersWithFav}
           onClick={onClickPlayer}
           uid={user && user.uid ? Number(user.uid) : 0}
+          onFavouriteToggle={(pid, liked) => {
+            console.log("Favourite toggled:", pid, liked);
+            setPlayers((prev) =>
+              prev.map((p) => (p.pid === pid ? { ...p, isFavourited: liked } : p))
+            );
+          }}
         />
 
         {/* Teams Section */}

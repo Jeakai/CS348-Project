@@ -45,16 +45,13 @@ const Card: React.FC<CardProps> = ({
       console.log("Favourite toggled successfully");
 
       setLiked(newLikedState);
-      if (onFavourite){
+      if (onFavourite) {
         onFavourite(newLikedState);
       }
     } catch (error) {
       console.error("Error updating favourites:", error);
       // Optionally, revert the state on error
       setLiked(liked);
-    }
-    if (onFavourite) {
-      onFavourite(newLikedState);
     }
   };
 
