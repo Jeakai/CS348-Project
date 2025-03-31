@@ -9,6 +9,7 @@ interface CarouselItem {
   title: string;
   image: string;
   description: string;
+  favCount?: number;
   isFavourited?: boolean;
 }
 
@@ -94,6 +95,7 @@ const Carousel: React.FC<CarouselProps> = ({
                   title={item.title}
                   image={item.image}
                   description={item.description}
+                  favCount={item.favCount}
                   isFavourited={item.isFavourited}
                   showFavourite={showFavourite}
                   onClick={() => onClick(item)}
@@ -135,6 +137,7 @@ const Carousel: React.FC<CarouselProps> = ({
                   title={item.title}
                   image={item.image}
                   description={item.description}
+                  favCount={item.favCount}
                   isFavourited={item.isFavourited}
                   showFavourite={showFavourite}
                   onFavourite={onFavouriteToggle?(liked) => onFavouriteToggle(item.pid, liked):undefined}
