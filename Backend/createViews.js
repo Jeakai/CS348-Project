@@ -1,5 +1,6 @@
-const pool = require('./config/db');
+const pool = require("./config/db");
 
+// delete if everything works with the view in sql file
 async function createLatestPlayersView() {
   const query = `
     CREATE OR REPLACE VIEW latest_players AS
@@ -24,7 +25,7 @@ async function createLatestPlayersView() {
     await pool.query(query); // Execute the query using your database connection
     console.log('View "latest_players" created successfully.');
   } catch (error) {
-    console.error('Error creating view:', error);
+    console.error("Error creating view:", error);
   }
 }
 

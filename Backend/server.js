@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 const cors = require('cors');
 
 // Import the createViews.js script to run it at startup
-const createViews = require('./createViews');
+// const createViews = require('./createViews');
 
 // Import routes and middleware
 const authRoutes = require('./routes/authRoutes');
@@ -36,8 +36,9 @@ app.use(cors({
   credentials: true
 }));
 
+// not needed already in createTables.sql file, remove if everything works
 // Run the createViews script during app startup to ensure the view is created
-createViews.createLatestPlayersView();
+// createViews.createLatestPlayersView();
 
 // Route mounting
 app.use('/api', authRoutes);                    // Handles /status, /register, /users/:id updates/deletions

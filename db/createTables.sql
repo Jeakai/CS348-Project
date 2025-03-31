@@ -6,6 +6,9 @@ DROP TABLE IF EXISTS favourites;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS players;
 DROP TABLE IF EXISTS teams;
+DROP FUNCTION IF EXISTS get_favorites_count;
+DROP VIEW IF EXISTS latest_players;
+DROP TRIGGER IF EXISTS set_created_at_on_insert;
 
 CREATE TABLE teams (
   tid			INT NOT NULL PRIMARY KEY,
@@ -14,10 +17,11 @@ CREATE TABLE teams (
 );
 
 CREATE TABLE users (
-  uid 				INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  uname				VARCHAR(50) NOT NULL UNIQUE,
+  uid 				    INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  uname				    VARCHAR(50) NOT NULL UNIQUE,
   hashed_password	VARCHAR(255) NOT NULL,
-  email				VARCHAR(100) NOT NULL UNIQUE
+  email				    VARCHAR(100) NOT NULL UNIQUE,
+  created_at      DATETIME
 );
 
 CREATE TABLE players (
@@ -31,7 +35,8 @@ CREATE TABLE players (
   draft_round	INT,
   draft_pick	INT,
   draft_tid		INT,
-  FOREIGN KEY (draft_tid) REFERENCES teams(tid) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (draft_tid) REFERENCES teams(tid) ON DELETE CASCADE ON UPDATE CASCADE,
+  INDEX idx_players_name (pname)
 );
 
 CREATE TABLE favourites (
@@ -73,3 +78,36 @@ CREATE TABLE members (
   FOREIGN KEY (tid) REFERENCES teams(tid) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+DELIMITER $$
+CREATE FUNCTION get_favorites_count(player_id INT) RETURNS INT
+DETERMINISTIC
+BEGIN
+  DECLARE count INT;
+  SELECT COUNT(*) INTO count FROM favourites WHERE pid = player_id;
+  RETURN count;
+END $$
+DELIMITER ;
+
+CREATE VIEW latest_players AS
+SELECT 
+  p.pid AS player_id,
+  p.pname AS player_name,
+  p.birth_year AS birth_year,
+  t.team AS team_name,
+  get_favorites_count(p.pid) AS favorites_count,
+  m.height_cm,
+  m.weight_kg,
+  SUM(m.pts) AS points
+FROM players p
+JOIN members m ON p.pid = m.pid
+JOIN teams t ON m.tid = t.tid
+WHERE m.season = '2019 - 2020'
+GROUP BY p.pid, p.pname, t.team, m.height_cm, m.weight_kg;
+
+DELIMITER $$
+CREATE TRIGGER set_created_at_on_insert
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    SET NEW.created_at = NOW();
+END $$
