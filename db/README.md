@@ -4,12 +4,19 @@
   - Populate tables with data manually (Teams needs to be done before Players which should be before Favorites)
 - Tested routes:
   - GET
+    - /status -> gets the status of the server
     - /players -> gets all players
     - /teams -> gets all teams
+    - /teams/:abbr -> gets a team with abbreviation = abbr
     - /favorites/:id -> gets all favorites for user with uid = id
+    - /users/profile -> gets the profile of the user (requires auth token in header)
   - PUT
-    - /favorites/:id -> updates favorites for user with uid = id; requires a body like `{"playerIds": [111, 117]}`
+    - /users/:id -> updates the user with uid = id; requires a body like `{"username": "userName", email: "emailId", "password": "password"}`
+    - /favorites/:id/toggle -> toggles favorite (as a transaction) for user with uid = id; requires a body like `{"playerId": "playerId"}`
+    - 
   - POST
-
-# TODO:
-- Test other routes
+    - /register -> registers a new user; requires a body like `{"username": "userName", email: "emailId", "password": "password"}`
+    - /login -> logs in a user; requires a body like `{"email": "emailId", "password": "password"}`
+  - DELETE
+    - /users/:id -> deletes the user with uid = id
+    - 

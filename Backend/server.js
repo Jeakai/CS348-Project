@@ -40,7 +40,7 @@ app.use(cors({
 createViews.createLatestPlayersView();
 
 // Route mounting
-app.use('/api', authRoutes);                    // Handles /register, /users/:id updates/deletions
+app.use('/api', authRoutes);                    // Handles /status, /register, /users/:id updates/deletions
 app.use('/api/players', playerRoutes);          // Handles players and season stats endpoints
 app.use('/api/teams', teamRoutes);              // Handles teams endpoint
 app.use('/api/favourites', favouriteRoutes);    // Handles favourites endpoints
