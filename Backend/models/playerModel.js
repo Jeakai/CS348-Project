@@ -22,7 +22,16 @@ exports.getPlayers = async (search, sortBy, order, groupBy) => {
   console.log("params", params);
   const [rows] = await pool.execute(sql, params);
 
-  console.log("playerModel:", rows);
+  console.log("playerModel:", rows[1]);
   return rows;
 };
 
+exports.getLatestPlayers = async () => {
+  let sql = 'SELECT * FROM latest_players';
+
+  console.log("SQL", sql);
+  const [rows] = await pool.query(sql);
+
+  console.log("playerModel:", rows);
+  return rows;
+};

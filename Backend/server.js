@@ -22,16 +22,16 @@ app.use(express.json());
 // Enable CORS
 app.use(cors({
   origin: '*', // Allow all origins; adjust as necessary
-  methods: ['GET', 'PUT', 'POST', 'OPTIONS'],
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
     'Origin',
     'X-Requested-With',
     'Content-Type',
     'Accept',
+    'Authorization',
     'Access-Control-Allow-Headers',
     'Access-Control-Request-Method',
     'Access-Control-Request-Headers'
-    
   ],
   credentials: true
 }));

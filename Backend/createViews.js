@@ -6,6 +6,7 @@ async function createLatestPlayersView() {
     SELECT 
         p.pid AS player_id,
         p.pname AS player_name,
+        p.birth_year AS birth_year,
         t.team AS team_name,
         COUNT(f.uid) AS favorites_count,
         m.height_cm,

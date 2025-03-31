@@ -2,11 +2,12 @@ const pool = require('../config/db');
 
 exports.getUserFavourites = async (userId) => {
   const sql = `
-    SELECT p.* 
-    FROM players p 
-    INNER JOIN favourites uf ON p.pid = uf.pid 
+    SELECT *
+    FROM latest_players lp
+    INNER JOIN favourites uf ON lp.player_id = uf.pid 
     WHERE uf.uid = ?`;
   const [rows] = await pool.execute(sql, [userId]);
+  console.log("who are my favourites?", rows);
   return rows;
 };
 

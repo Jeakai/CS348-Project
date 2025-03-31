@@ -21,3 +21,15 @@ exports.getPlayers = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getLatestPlayers = async (req, res, next) => {
+  try {
+    console.log("Fetching latest players");
+    const latestPlayers = await playerModel.getLatestPlayers();
+    res.json(latestPlayers);
+  } catch (error) {
+    console.error("Error fetching latest players:", error);
+    res.status(500).json({ error: "Internal server error" });
+    next(error);
+  }
+};
