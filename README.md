@@ -55,3 +55,15 @@
 - [teamRoutes.js](./Backend/routes/teamRoutes.js)
 - [teamController.js](./Backend/controllers/teamController.js)
 - [teamModel.js](./Backend/models/teamModel.js)
+
+
+### Advanced Feature 1 - Views
+
+### Advanced Feature 2 - Trigger
+
+### Advanced Feature 3 - Transactions
+
+### Advanced Feature 4 - Indexing
+
+### Advanced Feature 5 - Procedures
+
