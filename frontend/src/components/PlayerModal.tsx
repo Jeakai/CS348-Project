@@ -42,7 +42,11 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ show, handleClose, player, se
             setPlayer({ ...player, isFavourited: newLikedState });
             if (setPlayers && players) {
                 const updatedPlayers = players.map(p => 
-                    p.pid === pid ? { ...p, isFavourited: newLikedState } : p
+                    p.pid === pid ? {
+                        ...p,
+                        isFavourited: newLikedState,
+                        favCount: newLikedState ? p.favCount + 1 : p.favCount - 1
+                    } : p
                 );
                 setPlayers(updatedPlayers);
             }
