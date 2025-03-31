@@ -10,13 +10,14 @@ async function createLatestPlayersView() {
         t.team AS team_name,
         COUNT(f.uid) AS favorites_count,
         m.height_cm,
-        m.weight_kg
+        m.weight_kg,
+        SUM(m.pts) AS points
     FROM players p
     JOIN members m ON p.pid = m.pid
     JOIN teams t ON m.tid = t.tid
     LEFT JOIN favourites f ON p.pid = f.pid
     WHERE m.season = '2019 - 2020'
-    GROUP BY p.pid, p.pname, t.team, m.height_cm, m.weight_kg;
+    GROUP BY p.pid, p.pname, t.team, m.height_cm, m.weight_kg
   `;
 
   try {
