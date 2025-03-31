@@ -33,7 +33,7 @@ app.use(cors({
     'Access-Control-Request-Headers'
     
   ],
-  credentials: trues
+  credentials: true
 }));
 
 // Run the createViews script during app startup to ensure the view is created
