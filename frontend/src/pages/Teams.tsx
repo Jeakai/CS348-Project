@@ -89,7 +89,7 @@ const Teams: React.FC<TeamsProps> = ({ user }) => {
           description={team.description} 
           className="w-64 h-80 p-6" 
           onClick={() => handleCardClick(team.abbr)}
-          showFavorite={false}
+          showFavourite={false}
         />
       ))}
       </div>

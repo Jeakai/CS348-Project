@@ -9,7 +9,7 @@ interface CarouselItem {
   title: string;
   image: string;
   description: string;
-  isFavorited?: boolean;
+  isFavourited?: boolean;
 }
 
 interface CarouselProps {
@@ -18,7 +18,8 @@ interface CarouselProps {
   uid: number; 
   isLandingPage?: boolean;
   onClick?: (item: CarouselItem) => void;
-  showFavorite?: boolean; 
+  showFavourite?: boolean; 
+  onFavouriteToggle?: (pid: number, liked: boolean) => void;
 }
 
 const Carousel: React.FC<CarouselProps> = ({
@@ -26,8 +27,9 @@ const Carousel: React.FC<CarouselProps> = ({
   items,
   uid,
   isLandingPage = false,
-  showFavorite = true,
+  showFavourite = true,
   onClick = () => {},
+  onFavouriteToggle,
 }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -92,9 +94,10 @@ const Carousel: React.FC<CarouselProps> = ({
                   title={item.title}
                   image={item.image}
                   description={item.description}
-                  isFavorited={item.isFavorited}
-                  showFavorite={showFavorite}
+                  isFavourited={item.isFavourited}
+                  showFavourite={showFavourite}
                   onClick={() => onClick(item)}
+                  onFavourite={onFavouriteToggle? (liked) => onFavouriteToggle(item.pid, liked): undefined}
                 />
               </SplideSlide>
             ))}
@@ -132,8 +135,9 @@ const Carousel: React.FC<CarouselProps> = ({
                   title={item.title}
                   image={item.image}
                   description={item.description}
-                  isFavorited={item.isFavorited}
-                  showFavorite={showFavorite}
+                  isFavourited={item.isFavourited}
+                  showFavourite={showFavourite}
+                  onFavourite={onFavouriteToggle?(liked) => onFavouriteToggle(item.pid, liked):undefined}
                 />
               </div>
             </div>

@@ -8,10 +8,10 @@ interface CardProps {
   image: string;
   description: string;
   uid?: number; // Current user's ID (optional; if undefined, we assume not logged in)
-  isFavorited?: boolean; // Indicates if item is already in favourites (initial value)
-  showFavorite?: boolean; // Controls whether to display the heart (default true)
+  isFavourited?: boolean; // Indicates if item is already in favourites (initial value)
+  showFavourite?: boolean; // Controls whether to display the heart (default true)
   className?: string;
-  onFavorite?: (liked: boolean) => void;
+  onFavourite?: (liked: boolean) => void;
   onClick?: () => void;
 }
 
@@ -21,20 +21,22 @@ const Card: React.FC<CardProps> = ({
   image,
   description,
   uid,
-  isFavorited = false,
-  showFavorite = true,
+  isFavourited = false,
+  showFavourite = true,
   className,
-  onFavorite,
+  onFavourite,
   onClick,
 }) => {
-  const [liked, setLiked] = useState(isFavorited);
+  const [liked, setLiked] = useState(isFavourited);
 
   useEffect(() => {
-    setLiked(isFavorited);
-  }, [isFavorited]);
+    setLiked(isFavourited);
+  }, [isFavourited]);
 
-  const handleFavoriteClick = async (e: React.MouseEvent) => {
+  const handleFavouriteClick = async (e: React.MouseEvent) => {
+    console.log('Card click initiated');
     e.stopPropagation(); // Prevent card onClick from firing
+    e.preventDefault();
     const newLikedState = !liked;
     try { // TODO: Single call to toggle favourite using transaction in backend
       const token = localStorage.getItem("authToken");
@@ -53,13 +55,16 @@ const Card: React.FC<CardProps> = ({
         console.log("Favourite removed successfully");
       }
       setLiked(newLikedState);
+      if (onFavourite){
+        onFavourite(newLikedState);
+      }
     } catch (error) {
       console.error("Error updating favourites:", error);
       // Optionally, revert the state on error
       setLiked(liked);
     }
-    if (onFavorite) {
-      onFavorite(newLikedState);
+    if (onFavourite) {
+      onFavourite(newLikedState);
     }
   };
 
@@ -73,9 +78,9 @@ const Card: React.FC<CardProps> = ({
         <h3 className="font-bold text-xl">{title}</h3>
         <p>{description}</p>
       </div>
-      {(uid && uid !== 0 && showFavorite) && (
+      {(uid && uid !== 0 && showFavourite) && (
         <button
-          onClick={handleFavoriteClick}
+          onClick={handleFavouriteClick}
           className="absolute top-2 right-2 focus:outline-none"
         >
           {liked ? (

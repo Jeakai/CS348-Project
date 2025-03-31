@@ -16,7 +16,7 @@ interface PlayerModalProps {
     //     description: string; // Team
     //     points: number;
     //     image: string;
-    //     isFavorited: boolean;
+    //     isFavourited: boolean;
     // };
     setPlayer: (player: any) => void;
     players?: any[];
@@ -28,10 +28,10 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ show, handleClose, player, se
     // console.log('PlayerModal:', player, uid);
     // console.log('Players:', players);
 
-    const toggleFavorite = async () => {
-        const newLikedState = !player?.isFavorited;
+    const toggleFavourite = async () => {
+        const newLikedState = !player?.isFavourited;
         const pid = player.pid;
-        console.log('Toggle favorite for', pid, player.isFavorited);
+        console.log('Toggle favourite for', pid, player.isFavourited);
         
         try { // TODO: Single call to toggle favourite using transaction in backend
             const token = localStorage.getItem("authToken");
@@ -48,16 +48,16 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ show, handleClose, player, se
                 });
                 console.log("Favourite removed successfully");
             }
-            setPlayer({ ...player, isFavorited: newLikedState });
+            setPlayer({ ...player, isFavourited: newLikedState });
             if (setPlayers) {
                 const newPlayers = JSON.parse(JSON.stringify(players));
                 const playerIndex = newPlayers.findIndex((p: any) => p.pid === pid);
-                newPlayers[playerIndex].isFavorited = newLikedState;
+                newPlayers[playerIndex].isFavourited = newLikedState;
                 setPlayers(newPlayers);
             }
         } catch (error) {
             console.error("Error updating favourites:", error);
-            // setPlayer({ ...player, isFavorited: !newLikedState });
+            // setPlayer({ ...player, isFavourited: !newLikedState });
         }
     };
 
@@ -87,9 +87,9 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ show, handleClose, player, se
                     <p>Points: {player.points}</p>
                     <span 
                         style={{ cursor: 'pointer', fontSize: '24px' }} 
-                        onClick={toggleFavorite}
+                        onClick={toggleFavourite}
                     >
-                        {player.isFavorited ? '❤️' : '♡'}
+                        {player.isFavourited ? '❤️' : '♡'}
                     </span>
                 </div>
             </Modal.Body>
