@@ -64,7 +64,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
       setPlayers(prevPlayers => {
         const newPlayers = prevPlayers
           .filter(player => player.pid !== pid)
-          .map(p => ({ ...p, isFavourited: true }));
+          .map(p => ({ ...p, isFavourited: true, favCount: p.favorites_count }));
         console.log('New players:', newPlayers);
         return newPlayers;
       });
@@ -85,6 +85,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
     title: string;
     image: string;
     description: string;
+    favCount: number;
     isFavourited: boolean;
     age: number;
     height: number;
@@ -105,6 +106,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         title: player.player_name,
         image: imagePath,
         description: player.team_name || "",
+        favCount: player.favorites_count || 0,
         isFavourited: true, // All items in favorites are favorited by definition
         age: currentYear - (player.birth_year || currentYear),
         height: player.height_cm || 0,
