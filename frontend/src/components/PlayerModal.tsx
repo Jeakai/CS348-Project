@@ -33,21 +33,12 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ show, handleClose, player, se
         const pid = player.pid;
         console.log('Toggle favorite for', pid, player.isFavorited);
         
-        try { // TODO: Single call to toggle favourite using transaction in backend
-            const token = localStorage.getItem("authToken");
-            if (newLikedState) {
-                // Add favourite via POST
-                await axios.post(`http://localhost:3000/api/favourites/${uid}`, { pid }, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                console.log("Favourite added successfully");
-            } else {
-                // Remove favourite via DELETE
-                await axios.delete(`http://localhost:3000/api/favourites/${uid}/${pid}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                console.log("Favourite removed successfully");
-            }
+        try {
+            await axios.put(`http://localhost:3000/api/favourites/${uid}/toggle`, { pid }, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
+            });
+            console.log("Favourite toggled successfully");
+
             setPlayer({ ...player, isFavorited: newLikedState });
             if (setPlayers) {
                 const newPlayers = JSON.parse(JSON.stringify(players));
