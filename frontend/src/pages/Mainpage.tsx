@@ -67,7 +67,7 @@ const Mainpage: React.FC<MainpageProps> = ({ user }) => {
             age: currentYear - player.birth_year,
             height: player.height_cm,
             weight: player.weight_kg,
-            points: "10000",
+            points: player.points,
           };
         });
 

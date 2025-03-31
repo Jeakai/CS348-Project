@@ -33,27 +33,18 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ show, handleClose, player, se
         const pid = player.pid;
         console.log('Toggle favourite for', pid, player.isFavourited);
         
-        try { // TODO: Single call to toggle favourite using transaction in backend
-            const token = localStorage.getItem("authToken");
-            if (newLikedState) {
-                // Add favourite via POST
-                await axios.post(`http://localhost:3000/api/favourites/${uid}`, { pid }, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                console.log("Favourite added successfully");
-            } else {
-                // Remove favourite via DELETE
-                await axios.delete(`http://localhost:3000/api/favourites/${uid}/${pid}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                console.log("Favourite removed successfully");
-            }
+        try {
+            await axios.put(`http://localhost:3000/api/favourites/${uid}/toggle`, { pid }, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
+            });
+            console.log("Favourite toggled successfully");
+            
             setPlayer({ ...player, isFavourited: newLikedState });
-            if (setPlayers) {
-                const newPlayers = JSON.parse(JSON.stringify(players));
-                const playerIndex = newPlayers.findIndex((p: any) => p.pid === pid);
-                newPlayers[playerIndex].isFavourited = newLikedState;
-                setPlayers(newPlayers);
+            if (setPlayers && players) {
+                const updatedPlayers = players.map(p => 
+                    p.pid === pid ? { ...p, isFavourited: newLikedState } : p
+                );
+                setPlayers(updatedPlayers);
             }
         } catch (error) {
             console.error("Error updating favourites:", error);
