@@ -1,0 +1,6 @@
+uid,uname,hashed_password,email
+101,alice,$2b$12$h6XHb4kzGrHWskiTWVb2He7/Z5u09VjE23aS2JkqoWOTnDnLS/XDC,alice@example.com
+102,bob,$2b$12$c./WoBZL5NWjytQ..3ldNOErFAe/a1BlSuAn9hDOUbpyorggrIBUi,bob@example.com
+103,charlie,$2b$12$k1rE/ka0Z2ao.cKkLeTdseCLzwfPwgMGDRX4reYi5/xJg.nVKb0Aq,charlie@example.com
+104,dave,$2b$12$Kns1IREvtqdnaocJS1EIBOMUbZ4BurDGSjLEjUR8aAtNGKPhEt.Y.,dave@example.com
+105,eve,$2b$12$0o1zCkWcFxwGeM3f1LMyuuUcRwvaVeqnvl9M4ccPkdoB9htBYRRN2,eve@example.com
