@@ -1,7 +1,7 @@
-import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import './PlayerModal.css';
 import axios from 'axios';
+import React from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import './PlayerModal.css';
 
 interface PlayerModalProps {
     show: boolean;
@@ -65,30 +65,67 @@ const PlayerModal: React.FC<PlayerModalProps> = ({ show, handleClose, player, se
             backdrop={true}
         >
             <Modal.Header closeButton>
-                <Modal.Title>Player Details</Modal.Title>
+                <Modal.Title className="text-center w-100">Player Details</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div style={{ display: 'flex', justifyContent: 'center', textAlign: 'center', flexDirection: 'column', alignItems: 'center' }}>
+                <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    alignItems: 'center', 
+                    textAlign: 'center',
+                    gap: '0.5rem',
+                    padding: '0.5rem 1rem'
+                }}>
                     <img 
                         src={player.image || "https://via.placeholder.com/150"} 
                         alt="Player Image" 
-                        style={{ width: '150px', height: '150px', borderRadius: '50%' }} 
+                        style={{ 
+                            width: '140px', 
+                            height: '140px', 
+                            borderRadius: '50%', 
+                            objectFit: 'cover', 
+                            marginBottom: '10px',
+                            boxShadow: '0 0 10px rgba(0,0,0,0.1)'
+                        }} 
                     />
-                    <h3>{player.title}</h3>
-                    <p>Team: {player.description}</p>
-                    <p>Age: {player.age}</p>
-                    <p>Height: {player.height}</p>
-                    <p>Weight: {player.weight}</p>
-                    <p>Points: {player.points}</p>
-                    <span 
-                        style={{ cursor: 'pointer', fontSize: '24px' }} 
-                        onClick={toggleFavourite}
-                    >
-                        {player.isFavourited ? '❤️' : '♡'}
-                    </span>
+                    
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}>
+                        <h2 style={{ 
+                            fontWeight: 700, 
+                            fontSize: '26px', 
+                            marginBottom: 0, 
+                            lineHeight: 1 
+                        }}>
+                            {player.title}
+                        </h2>
+                        <span 
+                            style={{ 
+                                cursor: 'pointer', 
+                                fontSize: '24px',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                lineHeight: 1
+                            }} 
+                            onClick={toggleFavourite}
+                            title={player.isFavourited ? "Unfavourite" : "Add to favourites"}
+                        >
+                            {player.isFavourited ? '❤️' : '🤍'}
+                        </span>
+                    </div>
+
+                    <p style={{ fontStyle: 'italic', color: '#666', marginBottom: '0.8rem' }}>
+                        {player.description}
+                    </p>
+                    
+                    <div style={{ fontSize: '15px', lineHeight: '1.5' }}>
+                        <p><strong>Age:</strong> {player.age}</p>
+                        <p><strong>Height (cm):</strong> {player.height}</p>
+                        <p><strong>Weight (kg):</strong> {player.weight}</p>
+                        <p><strong>Points:</strong> {player.points}</p>
+                    </div>
                 </div>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer style={{ justifyContent: 'center' }}>
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
