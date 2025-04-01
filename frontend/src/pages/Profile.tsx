@@ -55,16 +55,16 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
   const handleFavouriteToggle = (pid: number, liked: boolean) => {
     console.log(`Toggling ${pid}, liked: ${liked}`);
     if (!liked) {
-      setFavourites(prevFavourites => {
-        const newFavs = prevFavourites.filter(fav => fav.player_id !== pid);
-        console.log('New favorites:', newFavs);
-        return newFavs;
-      });
+      // setFavourites(prevFavourites => {
+      //   const newFavs = prevFavourites.filter(fav => fav.player_id !== pid);
+      //   console.log('New favorites:', newFavs);
+      //   return newFavs;
+      // });
       
       setPlayers(prevPlayers => {
         const newPlayers = prevPlayers
-          .filter(player => player.pid !== pid)
-          .map(p => ({ ...p, isFavourited: true, favCount: p.favorites_count }));
+          // .filter(player => player.pid !== pid)
+          .map(p => ({ ...p, isFavourited: true }));
         console.log('New players:', newPlayers);
         return newPlayers;
       });
