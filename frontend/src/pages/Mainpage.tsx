@@ -64,7 +64,7 @@ const Mainpage: React.FC<MainpageProps> = ({ user }) => {
             image: imagePath, // Use the constructed path
             description: `${player.team_name}`,
             favCount: player.favorites_count,
-            isFavourited: player.favorites_count > 0,
+            // isFavourited: player.favorites_count > 0,
             age: currentYear - player.birth_year,
             height: player.height_cm,
             weight: player.weight_kg,

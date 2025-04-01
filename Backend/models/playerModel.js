@@ -9,11 +9,11 @@ exports.getPlayers = async (search, sortBy, order, groupBy) => {
     params.push(`%${search}%`);
   }
 
-  if (groupBy) {
+  if (groupBy) { // not used in the frontend
     sql += ` GROUP BY ${groupBy}`;
   }
 
-  if (sortBy) {
+  if (sortBy) { // player sorting
     const sortOrder = order && order.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
     sql += ` ORDER BY ${sortBy} ${sortOrder}`;
   }
