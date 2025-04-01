@@ -165,6 +165,17 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
                       <span className="font-semibold">Email:</span>
                       <span>{user?.email}</span>
                     </div>
+                    <div className="flex gap-2 items-center">
+                      <button
+                        onClick={() => {
+                          localStorage.removeItem("authToken");
+                          window.location.href = "/";
+                        }}
+                        className="text-sm text-red-500 hover:text-red-700 hover:underline border border-red-500 p-2 rounded"
+                      >
+                        Logout
+                      </button>
+                    </div>
                   </div>
                 </Card>
   
