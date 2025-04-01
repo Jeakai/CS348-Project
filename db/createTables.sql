@@ -89,20 +89,30 @@ END $$
 DELIMITER ;
 
 CREATE VIEW latest_players AS
+WITH season_stats AS (
+  SELECT 
+    m.pid,
+    SUM(m.pts) AS points,
+    MAX(m.height_cm) AS height_cm,
+    MAX(m.weight_kg) AS weight_kg
+  FROM members m
+  WHERE m.season = '2019 - 2020'
+  GROUP BY m.pid
+)
 SELECT 
   p.pid AS player_id,
   p.pname AS player_name,
   p.birth_year AS birth_year,
   t.team AS team_name,
   get_favorites_count(p.pid) AS favorites_count,
-  m.height_cm,
-  m.weight_kg,
-  SUM(m.pts) AS points
-FROM players p
-JOIN members m ON p.pid = m.pid
+  s.height_cm,
+  s.weight_kg,
+  s.points
+FROM season_stats s
+JOIN players p ON p.pid = s.pid
+JOIN members m ON m.pid = s.pid AND m.season = '2019 - 2020'
 JOIN teams t ON m.tid = t.tid
-WHERE m.season = '2019 - 2020'
-GROUP BY p.pid, p.pname, t.team, m.height_cm, m.weight_kg;
+GROUP BY p.pid, p.pname, p.birth_year, t.team, s.height_cm, s.weight_kg, s.points;
 
 DELIMITER $$
 CREATE TRIGGER set_created_at_on_insert
