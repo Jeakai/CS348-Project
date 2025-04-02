@@ -49,6 +49,12 @@
 ### Feature 4 - Player Sorting
 *Same files as feature 3*
 
+### Feature 5 - Favouriting/Unfavouriting Players
+- [Card.tsx](./frontend/src/components/Card.tsx)
+- [favRoutes.js](./Backend/routes/favRoutes.js)
+- [favController.js](./Backend/controllers/favController.js)
+- [favModel.js](./Backend/models/favModel.js)
+
 ### Feature 6 - Players from team (current & old)
 - [Teams.tsx](./frontend/src/pages/Teams.tsx)
 - [TeamDetails.tsx](./frontend/src/pages/TeamDetails.tsx)
@@ -58,12 +64,20 @@
 
 
 ### Advanced Feature 1 - Views
+- [PlayerModal.tsx](./frontend/src/components/PlayerModal.tsx)
+- [createTables.sql](https://github.com/Jeakai/CS348-Project/blob/d9a1885281846f26a7e1cd3776538c3cf405341a/db/createTables.sql#L91)
 
 ### Advanced Feature 2 - Trigger
+- [createTables.sql](https://github.com/Jeakai/CS348-Project/blob/d9a1885281846f26a7e1cd3776538c3cf405341a/db/createTables.sql#L118)
 
-### Advanced Feature 3 - Transactions
+### Advanced Feature 3 - Transaction
+- [favModel.js](https://github.com/Jeakai/CS348-Project/blob/d9a1885281846f26a7e1cd3776538c3cf405341a/Backend/models/favModel.js#L28)
 
 ### Advanced Feature 4 - Indexing
+- [createTables.sql](https://github.com/Jeakai/CS348-Project/blob/d9a1885281846f26a7e1cd3776538c3cf405341a/db/createTables.sql#L39)
 
-### Advanced Feature 5 - Procedures
+### Advanced Feature 5 - Function
+- [MainPage.tsx](./frontend/src/pages/MainPage.tsx)
+- [Profile.tsx](./frontend/src/pages/Profile.tsx)
+- [createTables.sql](https://github.com/Jeakai/CS348-Project/blob/d9a1885281846f26a7e1cd3776538c3cf405341a/db/createTables.sql#L82)
 
