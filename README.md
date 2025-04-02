@@ -77,7 +77,7 @@
 - [createTables.sql](https://github.com/Jeakai/CS348-Project/blob/d9a1885281846f26a7e1cd3776538c3cf405341a/db/createTables.sql#L39)
 
 ### Advanced Feature 5 - Function
-- [MainPage.tsx](./frontend/src/pages/MainPage.tsx)
+- [Mainpage.tsx](./frontend/src/pages/Mainpage.tsx)
 - [Profile.tsx](./frontend/src/pages/Profile.tsx)
 - [createTables.sql](https://github.com/Jeakai/CS348-Project/blob/d9a1885281846f26a7e1cd3776538c3cf405341a/db/createTables.sql#L82)
 
