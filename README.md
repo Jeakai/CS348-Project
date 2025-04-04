@@ -14,6 +14,11 @@
 
 *The `users` and `favourites` relations have no starting data and will be filled by the application at runtime*
 
+## Test Index Speed Up
+1. First create & load the production database
+2. Open `./db/testIndex.py` and fill in the database credentials for the users local database
+3. run `python3 ./db/testIndex.py`
+
 ## Run the application 
 1. `cd ./Backend`
    - `npm install`
@@ -25,7 +30,6 @@
    - *Open the localhost url in browser with port number 3000. If a fetching error occurs, try removing the auth token by opening the console, clicking on the `Application` tab and looking in the `Local storage` tab. If all else fails, try port number 5137*
 
 *If issues arise, check that `./Backend/.env` has the proper credentials*
-*Additionally, *
 
 ## Implemented Features
 ### Feature 1 -  User Registration
@@ -80,4 +84,3 @@
 - [Mainpage.tsx](./frontend/src/pages/Mainpage.tsx)
 - [Profile.tsx](./frontend/src/pages/Profile.tsx)
 - [createTables.sql](https://github.com/Jeakai/CS348-Project/blob/d9a1885281846f26a7e1cd3776538c3cf405341a/db/createTables.sql#L82)
-
