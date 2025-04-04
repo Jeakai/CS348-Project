@@ -32,10 +32,10 @@ def test_index(cursor, table_name, column_name, test_value, index_name):
 
 if __name__ == "__main__":
     db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="htkM3zpvyM!",
-        database="my_basketball_db"
+        host="",
+        user="",
+        password="",
+        database=""
     )
     cursor = db.cursor()
     test_index(cursor, "players", "pname", "a", "idx_players_name")
